@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **T1b of 23** — waiting for start/stop with X and Ctrl+C
+Progress: **T1c of 23** — waiting for edit → save → ↑ Enter color loop
 
 ## Bites
 
@@ -20,7 +20,7 @@ Progress: **T1b of 23** — waiting for start/stop with X and Ctrl+C
 ### Terminal quests + rest of the level
 
 - [x] **T1a.** `pwd` then `ls` — see `level1.py` in the project folder
-- [ ] **T1b.** Run `python level1.py`; close with X, then stop with `Ctrl+C`
+- [x] **T1b.** Run `python level1.py`; close with X, then stop with `Ctrl+C`
 - [ ] **T1c.** Change background color, save, re-run with `↑` + `Enter` (try 3 colors)
 - [ ] **T2.** Add `ENV_TAG` so the title reads `Platformer (.venv)`; confirm with `which python`
 - [ ] **7.** Create the player sprite at a start position and draw it
