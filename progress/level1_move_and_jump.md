@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **T1a of 23** — waiting for `pwd` / `ls`
+Progress: **T1b of 23** — waiting for start/stop with X and Ctrl+C
 
 ## Bites
 
@@ -19,7 +19,7 @@ Progress: **T1a of 23** — waiting for `pwd` / `ls`
 
 ### Terminal quests + rest of the level
 
-- [ ] **T1a.** `pwd` then `ls` — see `level1.py` in the project folder
+- [x] **T1a.** `pwd` then `ls` — see `level1.py` in the project folder
 - [ ] **T1b.** Run `python level1.py`; close with X, then stop with `Ctrl+C`
 - [ ] **T1c.** Change background color, save, re-run with `↑` + `Enter` (try 3 colors)
 - [ ] **T2.** Add `ENV_TAG` so the title reads `Platformer (.venv)`; confirm with `which python`
