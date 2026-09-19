@@ -4,13 +4,13 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 1 of 23** — waiting for learner to create `level1.py`
+Progress: **bite 2 of 23** — waiting for plain Arcade window (no class yet)
 
 ## Bites
 
 ### Grow `level1.py` (one component at a time)
 
-- [ ] **1.** `def main()` that `print`s a message, then call `main()` — message appears in the terminal
+- [x] **1.** `def main()` that `print`s a message, then call `main()` — message appears in the terminal
 - [ ] **2.** Inside `main()`: `import arcade`, open `arcade.Window(...)`, call `arcade.run()` — a window opens (no class yet)
 - [ ] **3.** Wrap in `class GameWindow(arcade.Window)` with `__init__` + `super().__init__(...)`; `main()` creates `GameWindow()` — window still opens; `print` in `__init__` proves the class ran
 - [ ] **4.** Replace magic numbers with `WINDOW_WIDTH`, `WINDOW_HEIGHT`, `WINDOW_TITLE` — change a constant and the window size or title changes
