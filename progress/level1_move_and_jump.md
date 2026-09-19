@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 7 of 23** — waiting for player sprite on screen
+Progress: **bite 8 of 23** — waiting for ground row of grass tiles
 
 ## Bites
 
@@ -23,7 +23,7 @@ Progress: **bite 7 of 23** — waiting for player sprite on screen
 - [x] **T1b.** Run `python level1.py`; close with X, then stop with `Ctrl+C`
 - [x] **T1c.** Change background color, save, re-run with `↑` + `Enter` (try 3 colors)
 - [x] **T2.** Add `ENV_TAG` so the title reads `Platformer (.venv)`; confirm with `which python`
-- [ ] **7.** Create the player sprite at a start position and draw it
+- [x] **7.** Create the player sprite at a start position and draw it
 - [ ] **8.** Build the ground row with a loop and draw it
 - [ ] **T3a.** `deactivate`, then `python3 level1.py` — usually no window / no arcade
 - [ ] **T3b.** Activate again and run — game + `(.venv)` title back
