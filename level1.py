@@ -1,8 +1,13 @@
-# TODO: class GameWindow(arcade.Window); main() creates GameWindow()
+# TODO: WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE — use them in super().__init__
 import arcade
 
+class GameWindow(arcade.Window):
+    def __init__(self):
+        super().__init__(800, 600, "Platformer")
+        print("GameWindow created")
+
 def main():
-    arcade.open_window(800, 600, "Platformer")
+    window = GameWindow()
     arcade.run()
 
 if __name__ == "__main__":
