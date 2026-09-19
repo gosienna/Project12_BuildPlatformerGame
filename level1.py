@@ -1,4 +1,3 @@
-# TODO: add on_draw method with self.clear() — paints background_color each frame
 import arcade
 
 WINDOW_WIDTH = 800
@@ -8,9 +7,9 @@ WINDOW_TITLE = "Platformer"
 class GameWindow(arcade.Window):
     def __init__(self):
         super().__init__(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
-        self.background_color = arcade.color.RED
+        self.background_color = arcade.color.AMAZON
         print("GameWindow created")
-        
+
     def on_draw(self):
         self.clear()
 
