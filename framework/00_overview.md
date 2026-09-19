@@ -10,7 +10,7 @@ This folder describes **what to build and how to check it** for each tutorial le
 
 Target: Python Arcade 3.x (Python 3.10+). Art and sounds come from Arcade's built-in `:resources:` library.
 
-**Start with [Level 0: Setup Check](level0_setup.md).** The instructor checks Python, the virtual environment and Arcade before Level 1. If anything is missing, the instructor gives the matching install instructions.
+**Start with [Level 0: Quick Setup Check](level0_setup.md).** It takes about 5 minutes. It only checks that Python 3.10+ and Arcade are installed and that a window opens, and gives the matching fix if not. The `.venv` and the terminal are taught in Level 1, once a game is running and each command gives a visible result.
 
 ## Dependency rule: one install only
 
@@ -27,8 +27,8 @@ The only thing a child ever installs is **`arcade`** (`pip install arcade`). Arc
 
 | Level | Theme | Builds on | Main new concepts |
 |---|---|---|---|
-| 0 | Setup Check | nothing | Python, terminal, virtual environment, `pip install arcade` |
-| 1 | Move & Jump | nothing | window, sprite, game loop, keyboard, gravity |
+| 0 | Quick Setup Check (5 min) | nothing | none (copy the commands) |
+| 1 | Move & Jump | L0 | window, sprite, game loop, keyboard, gravity, **terminal, `.venv`** |
 | 2 | Endless World | L1 | camera, procedural generation, random, HUD text |
 | 3 | Coins & Platforms | L2 | collision, score, sound, generation rules |
 | 4 | Danger! | L3 | lives, respawn, invincibility timer, enemies, reset/restart |
