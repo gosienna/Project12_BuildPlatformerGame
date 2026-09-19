@@ -6,16 +6,14 @@ Source plan: `framework/level0_setup.md`
 
 Progress: **Level 0 complete** — ready for Level 1
 
-> Curriculum note (main merge): Level 0 was slimmed to three checks. The old `.venv` / terminal mini-goals now live in Level 1 as terminal quests **T1–T5**.
+## Bites
 
-## Bites (matches current plan)
+- [x] **0.1 Python.** `python3 --version` — need 3.10 or newer (observed 3.13.5)
+- [x] **0.2 Arcade.** `python3 -c "import arcade; print(arcade.__version__)"` — need 3.x (observed 3.3.3; used Fix B: `.venv` + `pip install arcade`)
+- [x] **0.3 Hello window.** Create `check_setup.py`, run it — green window titled "Setup OK!" opens and closes cleanly
 
-- [x] **1.** Python 3.10+ (`python3 --version`) — observed 3.13.5
-- [x] **2.** Arcade 3.x (`import arcade; print(arcade.__version__)`) — observed 3.3.3
-- [x] **3.** Hello window: `check_setup.py` opens green "Setup OK!" window
+## Done when
 
-## Extra work done before the slim (carries into Level 1)
-
-- [x] `.venv` created and activated
-- [x] `where_am_i.py` detective script (prints YES inside `.venv`)
-- [ ] Remaining terminal / `.venv` practice → continue as Level 1 **T1–T5**
+- [x] Python 3.10+ is confirmed
+- [x] `import arcade` works (3.x)
+- [x] The green window opened and closed cleanly
