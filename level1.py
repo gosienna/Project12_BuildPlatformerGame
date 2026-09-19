@@ -10,6 +10,9 @@ class GameWindow(arcade.Window):
         super().__init__(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
         self.background_color = arcade.color.RED
         print("GameWindow created")
+        
+    def on_draw(self):
+        self.clear()
 
 def main():
     window = GameWindow()
