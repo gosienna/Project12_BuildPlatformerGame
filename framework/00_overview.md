@@ -12,6 +12,17 @@ Target: Python Arcade 3.x (Python 3.10+). Art and sounds come from Arcade's buil
 
 **Start with [Level 0: Setup Check](level0_setup.md).** The instructor checks Python, the virtual environment and Arcade before Level 1. If anything is missing, the instructor gives the matching install instructions.
 
+## Dependency rule: one install only
+
+The only thing a child ever installs is **`arcade`** (`pip install arcade`). Arcade brings its own dependencies automatically.
+
+- **Allowed:** `arcade` and Python's standard library (`random`, `os`, `sys`, `math`). These need no installing.
+- **Not allowed:** any other `pip install` (numpy, matplotlib, pillow, pygame, pytest and so on). If a level seems to need one, do it with plain Python or with an Arcade feature instead.
+- **Tests:** plain scripts using `assert`. No pytest or other test framework. `xvfb-run` (Linux only, teachers only) is a system program, not a Python package.
+- **Save files (Level 6):** a plain text file using built-in `open()` and `int()`. No extra module is needed.
+- **Art and sound:** use Arcade's built-in `:resources:` only. Don't ask the child to download assets.
+- **Adding a level:** list any new import in that level's "Key components" table, and it must be `arcade` or standard library.
+
 ## Progression at a glance
 
 | Level | Theme | Builds on | Main new concepts |
