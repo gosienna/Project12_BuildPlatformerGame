@@ -1,3 +1,4 @@
+# TODO: import sys; ENV_TAG; use f"Platformer ({ENV_TAG})" in super().__init__
 import arcade
 
 WINDOW_WIDTH = 800
