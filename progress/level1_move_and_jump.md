@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 6 of 23** — waiting for on_draw + clear (color becomes visible)
+Progress: **T1a of 23** — waiting for `pwd` / `ls`
 
 ## Bites
 
@@ -15,7 +15,7 @@ Progress: **bite 6 of 23** — waiting for on_draw + clear (color becomes visibl
 - [x] **3.** Wrap in `class GameWindow(arcade.Window)` with `__init__` + `super().__init__(...)`; `main()` creates `GameWindow()` — window still opens; `print` in `__init__` proves the class ran
 - [x] **4.** Replace magic numbers with `WINDOW_WIDTH`, `WINDOW_HEIGHT`, `WINDOW_TITLE` — change a constant and the window size or title changes
 - [x] **5.** Set `self.background_color` in `__init__` — window fills with a color
-- [ ] **6.** Add `on_draw` with `self.clear()` — colored window still draws cleanly each frame
+- [x] **6.** Add `on_draw` with `self.clear()` — colored window still draws cleanly each frame
 
 ### Terminal quests + rest of the level
 
