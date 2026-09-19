@@ -4,7 +4,7 @@
 Turn the project into a finished game: a title screen, gameplay, and a game-over/win screen. The hero is animated (idle, walk, jump, fall, facing direction). Moving platforms, a pause key, a stage-clear bonus, and a high score that is saved to a file are added. The maps move into their own module, `stages.py`.
 
 ## Concepts for the child
-Classes you write yourself (a `Player` that knows how to animate), screens (Views) and switching between them, animation as a flip book, `import` from your own file, reading and writing files, and `try/except`.
+Classes you write yourself (a `Player` that knows how to animate), screens (Views) and switching between them, animation as a flip book, `import` from your own file, reading and writing files (with built-in `open()`, no install needed), and `try/except`.
 
 ## Architecture
 
