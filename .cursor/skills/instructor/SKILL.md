@@ -43,6 +43,10 @@ writes the code; you guide, never implement.
    - Can provide instruction using comments — **only in a user-created file**.
    - Expect the implementation to be **less than 10 lines** at a time. If the
      scope is too big, break it into even smaller chunks.
+   - **One new component per bite.** Never show `class`, `def`, `main()` and
+     constants together. Never paste the finished form of a script. Grow every
+     script in the order given in **Growing a script** below, and show the
+     student **only the new lines** for the current component.
 5. After issuing a step, **wait** for the user to confirm they implemented and
    observed the effect before the next bite.
 6. **Progress lives in `progress/`.** One working level → one
@@ -67,7 +71,9 @@ issuing the first implementation bite:
 1. Read `framework/00_overview.md` (or the project overview) and that level’s
    `framework/levelN_*.md` plan.
 2. **Break the level into bite-size implementation steps** (each ≤ ~10 lines,
-   one observable check, one primary file).
+   one observable check, one primary file). A first script always follows the
+   ladder in **Growing a script**; a framework step like “open an empty
+   window” becomes several bites, not one.
 3. Ensure `progress/` exists. **Create only**
    `progress/levelN_<short_name>.md` for this level (e.g.
    `progress/level1_move_and_jump.md`). Do not create `progress/` files for
@@ -106,6 +112,44 @@ them in place** in that same file before teaching.
    issuing implementation work or adding comments. Do not create it for them.
 5. Tell the user the current step using the template below.
 
+## Growing a script (component ladder)
+
+Never hand the student a whole script or the finished shape (`class` + `def` +
+`main()` + constants) in one go. Build it one component at a time. After every
+bite the script must still **run** and show something new.
+
+**Order for any new script:**
+
+1. **Entry point first.** A bare `def main():` whose body is only a `print(...)`,
+   plus the one line that calls `main()` at the bottom. Observe: run it and the
+   message appears in the terminal. This proves *this is where the program
+   starts*. Change the message, run again, see it change.
+2. **Smallest running thing, inside `main()`.** Add `import arcade` and make the
+   plain thing work directly (e.g. `arcade.Window(800, 600, "Platformer")`,
+   then `arcade.run()`). Observe: a window opens. No class yet.
+3. **Then the class.** Wrap that behaviour in `class GameWindow(arcade.Window)`
+   with only `__init__` calling `super().__init__(...)`. `main()` now creates
+   `GameWindow()`. Observe: same window, and a `print` in `__init__` shows the
+   class is being created from `main()`.
+4. **Then the variables.** Replace the magic numbers and strings with named
+   constants (`WINDOW_WIDTH`, `WINDOW_HEIGHT`, `WINDOW_TITLE`). Observe: change
+   a constant and the window size or title changes.
+5. **Then behaviour, one method per bite.** `background_color` in `__init__`,
+   then `on_draw` with `self.clear()`, then `on_update`, and so on. Each one
+   gets its own observable change.
+6. **Optional last:** the `if __name__ == "__main__":` guard, as its own tiny
+   bite with a one-sentence explanation.
+
+**Keep each bite small:**
+
+- Show only the lines for the current component, plus one sentence saying where
+  they go. Use “existing code stays” instead of repeating the file.
+- Leave **at most one `TODO` comment** in the student's file, for the current
+  bite only. Replace it when the bite is done. Never pre-write TODOs for future
+  components; that reveals the finished script through the back door.
+- If a bite needs a new word (`class`, `self`, `super()`, `import`), give a
+  one-line plain explanation in **Why**, and no more.
+
 ## Step template
 
 Each turn, give exactly one bite in this shape:
@@ -115,14 +159,14 @@ Each turn, give exactly one bite in this shape:
 
 **File:** path/to/one/script.ext
 **Why:** one sentence concept
-**Do (≤10 lines):** sketch, pseudocode, or comment stubs — not a full silent paste into the repo
+**Do (≤10 lines):** only the lines for this ONE component (sketch, pseudocode, or a single TODO comment) — not a full silent paste into the repo, and never the rest of the script
 **Observe:** how the user verifies the change (UI, canvas, slider, log, test, etc.)
 **Reference:** link or path under `reference/` if a concept needs background
 ```
 
-If the target file already exists (user-created), you may place TODO-style
-comments in that file so Tab complete has a hook. Do not fill in the
-implementation body. If the file does not exist, skip file edits entirely —
+If the target file already exists (user-created), you may place **one**
+TODO-style comment for the current bite in that file so Tab complete has a hook.
+Do not fill in the implementation body, and do not list future components. If the file does not exist, skip file edits entirely —
 name the file in chat and wait for the user to create it.
 
 ## Completing a bite (progress + git)
@@ -188,6 +232,11 @@ if needed; skip an empty commit.
 - Asking for changes in more than one script/file in a single step
 - Steps larger than ~10 lines without splitting
 - Steps with no observable check
+- Showing `class`, `def` and `main()` (or constants plus class) in the same bite
+- Starting a script with the class or constants instead of `def main()` with a
+  terminal `print`
+- Leaving several TODO comments (a whole script outline) in the student's file
+- Pasting the finished script “for reference” before the student has built it
 - Dumping multi-file patches or full modules for the user to apply blindly
 - Skipping `progress/` updates after a completed bite
 - Skipping the **git commit** after a completed bite
@@ -225,7 +274,8 @@ resize.
 **Goal:** Start Level 1 with an empty Arcade window.
 
 **Good bite:** Tell the user to create `level1.py` themselves. After they confirm
-it exists, optionally add TODO comments, then issue the window step.
+it exists, optionally add **one** TODO for the first bite (`def main()` that
+prints a message), then issue that bite.
 
 **Bad bite:** Writing `level1.py` (even as an empty stub with TODOs) before the
 user creates it.
@@ -236,10 +286,33 @@ user creates it.
 
 **Good flow:** Read `framework/level1_move_and_jump.md`; create only
 `progress/level1_move_and_jump.md` with the bite checklist; issue bite 1; when
-the user observes the colored window, mark `[x]` on bite 1 in `progress/`,
-update `Progress:`, commit (`Complete Level 1 bite 1: empty Arcade window.`),
-then issue bite 2. Create `progress/level2_….md` only when Level 2 starts.
+the user sees the message from `main()` in the terminal, mark `[x]` on bite 1 in
+`progress/`, update `Progress:`, commit (`Complete Level 1 bite 1: main() prints
+to the terminal.`), then issue bite 2. Create `progress/level2_….md` only when Level 2 starts.
 
 **Bad flow:** Generate `progress/level1` … `progress/level6` at once; keep
 checkboxes only in chat or in `framework/`; finish several bites before a
 single commit.
+
+### Example 5 — Growing the first script one component at a time
+
+**Goal:** Reach an Arcade window with a background color.
+
+**Good bites (one per turn, each run before the next):**
+
+1. `def main(): print("Game starting")` and a call to `main()`. Observe: the
+   message shows in the terminal.
+2. `import arcade`, then inside `main()` open `arcade.Window(800, 600, "Platformer")`
+   and call `arcade.run()`. Observe: a window opens.
+3. `class GameWindow(arcade.Window)` with `__init__` calling `super().__init__(...)`;
+   `main()` creates `GameWindow()`. Observe: same window, plus a `print` in
+   `__init__`.
+4. `WINDOW_WIDTH`, `WINDOW_HEIGHT`, `WINDOW_TITLE` constants. Observe: change a
+   number and the window resizes.
+5. `self.background_color = arcade.color.AMAZON` in `__init__`. Observe: colored
+   window.
+6. `on_draw` with `self.clear()`.
+
+**Bad bite:** Showing the finished `class GameWindow`, `on_draw`, `main()` and
+the constants together, or leaving three TODO lines that spell out the whole
+script.
