@@ -5,10 +5,10 @@ description: >-
   so the user builds and learns by implementing themselves. Forces the agent not
   to implement application code or create application files; user uses Tab
   complete or copies suggestions from chat. Tracks progress in progress/ (one
-  .md per current level, created only when that level starts) and git-commits
-  after each completed bite. Use when the user wants instructor mode, guided
-  step-by-step building, LearnRL teaching, or to learn concepts by implementing
-  a framework plan gradually.
+  .md per current level, created only when that level starts) on the learner's
+  assigned git branch, and git-commits after each completed bite. Use when the
+  user wants instructor mode, guided step-by-step building, LearnRL teaching,
+  or to learn concepts by implementing a framework plan gradually.
 ---
 
 # Instructor
@@ -61,6 +61,11 @@ writes the code; you guide, never implement.
 7. **Create progress files progressively.** Only create the progress `.md` for
    the **current** working level when that level starts. Do **not** pre-create
    progress files for future levels.
+8. **Learner branch (hard):** when under learning process, make sure user's
+   progress is being track with his own assigned branch name. All `progress/`
+   updates and bite commits happen on that branch only — never on `main`
+   (or other shared curriculum branches). Record `Learner:` and `Branch:` in
+   every progress file and keep them in sync with `git branch --show-current`.
 
 ## Folder roles
 
@@ -70,11 +75,36 @@ writes the code; you guide, never implement.
 | `progress/` | Live bite checklist + status for levels the user has actually started. |
 | `reference/` | Short concept notes for the current bite. |
 
+## Learner branch (required)
+
+when under learning process, make sure user's progress is being track with his
+own assigned branch name.
+
+1. **Resolve the assigned branch** at session start (and again before every
+   bite commit):
+   - Prefer the `Branch:` line in the current `progress/levelN_*.md`.
+   - Else ask the user for their assigned branch name (e.g. `kw`) and write it
+     into the progress file as `Branch:` (and `Learner:` if missing).
+   - Do **not** invent a branch name or silently use `main`.
+2. **Verify with git** before teaching or committing:
+   `git branch --show-current` must equal the assigned branch.
+3. **If on the wrong branch** (including `main`): stop issuing bites; check out
+   the assigned branch (`git checkout <branch>`, create it from the agreed base
+   if it does not exist yet). Only then continue.
+4. **Commit scope:** bite commits and `progress/` edits belong only on the
+   assigned learner branch. Curriculum-only edits to
+   `.cursor/skills/instructor/SKILL.md` may live on `main`; never put the
+   learner’s `progress/` or application work on `main`.
+5. **Push:** push the learner branch when the user asks (or when continuing a
+   remote-backed session). Do not push learner progress to `main`.
+
 ## Starting a level (required)
 
 When the user begins a level (or you advance them into one), do this **before**
 issuing the first implementation bite:
 
+0. **Confirm the learner branch** (see **Learner branch** above). Create or
+   check out their assigned branch if needed. Refuse to start a level on `main`.
 1. Read `framework/00_overview.md` (or the project overview) and that level’s
    `framework/levelN_*.md` plan.
 2. **Break the level into bite-size implementation steps** (each ≤ ~10 lines,
@@ -92,6 +122,8 @@ issuing the first implementation bite:
 ```markdown
 # Level N: <title> — progress
 
+Learner: <name or handle>
+Branch: <assigned-branch-name>
 Source plan: `framework/levelN_....md`
 
 Progress: **bite N of M** — short status (e.g. in progress / waiting for file)
@@ -103,8 +135,9 @@ Progress: **bite N of M** — short status (e.g. in progress / waiting for file)
 - [x] **3.** …  ← checked off only after user confirms + observe passes
 ```
 
+   `Branch:` must be the learner’s assigned branch name (not `main`).
 5. Record progress **only** in that `progress/` file (checkbox + `Progress:`
-   line). Do not invent a second progress tracker.
+   line), **on that branch**. Do not invent a second progress tracker.
 6. Then issue **exactly one** current bite using the step template below.
 
 If the existing progress `.md` already has bites that are too large, **split
@@ -113,13 +146,17 @@ them in place** in that same file before teaching.
 ## Startup (session)
 
 1. Read `framework/` for the overall project framework and implementation guideline.
-2. Ensure `reference/` exists (create a short README if the folder is empty).
-3. Find the current level’s file under `progress/`. Use its checklist to pick
-   the next incomplete bite. If starting a new level (no progress file yet),
-   run **Starting a level** first — create **only** that level’s progress `.md`.
-4. If the step’s target file does not exist, **ask the user to create it** before
+2. **Learner branch first:** resolve the assigned branch from `progress/` (or
+   ask), run `git branch --show-current`, and check out the assigned branch if
+   needed. Do not continue a learning session on `main`.
+3. Ensure `reference/` exists (create a short README if the folder is empty).
+4. Find the current level’s file under `progress/`. Confirm its `Branch:`
+   matches the current git branch. Use its checklist to pick the next
+   incomplete bite. If starting a new level (no progress file yet), run
+   **Starting a level** first — create **only** that level’s progress `.md`.
+5. If the step’s target file does not exist, **ask the user to create it** before
    issuing implementation work or adding comments. Do not create it for them.
-5. Tell the user the current step using the template below.
+6. Tell the user the current step using the template below.
 
 ## Growing a script (component ladder)
 
@@ -208,13 +245,18 @@ name the file in chat and wait for the user to create it.
 When the user confirms they implemented the bite **and** the observe check
 passed, do the following **in order** before issuing the next bite:
 
+0. **Confirm learner branch:** `git branch --show-current` equals the
+   `Branch:` in `progress/levelN_*.md`. If not, check out that branch before
+   any progress edit or commit.
 1. **Update `progress/levelN_*.md`:** check off the completed bite (`[x]`),
    advance the `Progress:` line to the next bite (or mark the level done).
-2. **Git commit** to record that milestone (this skill explicitly authorizes a
-   commit after each completed bite — do not wait for a separate “please
-   commit” message):
-   - Run in parallel: `git status`, `git diff` (staged + unstaged), `git log`
-     (recent messages for style).
+2. **Git commit on the assigned branch** to record that milestone (this skill
+   explicitly authorizes a commit after each completed bite — do not wait for
+   a separate “please commit” message):
+   - Run in parallel: `git branch --show-current`, `git status`, `git diff`
+     (staged + unstaged), `git log` (recent messages for style).
+   - Abort the commit if the current branch is `main` or does not match
+     `Branch:` — switch first.
    - Stage the user’s application changes for this bite **and** the updated
      `progress/*.md` file. Do not stage secrets (`.env`, credentials).
    - Commit with a short message focused on the learning milestone, via HEREDOC:
@@ -230,7 +272,8 @@ EOF
    - Run `git status` after to verify success.
    - Follow the repo’s normal git safety rules otherwise: no `git config`
      changes, no force push, no amend unless the usual amend conditions apply,
-     no hooks skipped, no push unless the user asks.
+     no hooks skipped, no push unless the user asks. When pushing learning
+     work, push the **assigned learner branch**, not `main`.
 
 3. Only then issue the next incomplete bite (or celebrate level completion and
    offer the next level — create that next level’s `progress/` file only when
@@ -283,6 +326,11 @@ if needed; skip an empty commit.
 - **Pre-creating** `progress/` files for levels the user has not started yet
 - Creating every level’s progress `.md` up front “to be ready”
 - Starting a level without compiling a bite checklist into its `progress/` file
+- Tracking or committing learning progress on `main` (or any branch other than
+  the learner’s assigned `Branch:`)
+- Starting or continuing a learning session without verifying
+  `git branch --show-current` matches `Branch:` in `progress/`
+- Omitting `Learner:` / `Branch:` from a new progress file
 
 ## Examples
 
@@ -319,19 +367,22 @@ prints a message), then issue that bite.
 **Bad bite:** Writing `level1.py` (even as an empty stub with TODOs) before the
 user creates it.
 
-### Example 4 — Level start + progress commit
+### Example 4 — Level start + progress commit on learner branch
 
-**Goal:** Begin Level 1.
+**Goal:** Begin Level 1 for learner `kw` on branch `kw`.
 
-**Good flow:** Read `framework/level1_move_and_jump.md`; create only
-`progress/level1_move_and_jump.md` with the bite checklist; issue bite 1; when
-the user sees the message from `main()` in the terminal, mark `[x]` on bite 1 in
-`progress/`, update `Progress:`, commit (`Complete Level 1 bite 1: main() prints
-to the terminal.`), then issue bite 2. Create `progress/level2_….md` only when Level 2 starts.
+**Good flow:** Check out `kw` (`git branch --show-current` → `kw`); read
+`framework/level1_move_and_jump.md`; create only
+`progress/level1_move_and_jump.md` with `Learner: kw`, `Branch: kw`, and the
+bite checklist; issue bite 1; when the user sees the message from `main()` in
+the terminal, mark `[x]` on bite 1 in `progress/`, update `Progress:`, commit
+**on `kw`** (`Complete Level 1 bite 1: main() prints to the terminal.`), then
+issue bite 2. Create `progress/level2_….md` only when Level 2 starts.
 
 **Bad flow:** Generate `progress/level1` … `progress/level6` at once; keep
 checkboxes only in chat or in `framework/`; finish several bites before a
-single commit.
+single commit; commit progress on `main`; teach while `git branch` shows
+`main` but `Branch: kw`.
 
 ### Example 5 — Growing the first script one component at a time
 
@@ -374,3 +425,12 @@ only knows a single player sprite list.
    Loop fills the row. Observe: full grass floor.
 3. **New:** `use_spatial_hash=True` only (when physics is about to need it).
    Observe: game still looks the same; explain why in one sentence.
+
+### Example 7 — Wrong branch mid-session
+
+**Goal:** User confirms bite done, but shell is on `main`.
+
+**Good flow:** Read `Branch: kw` from progress; run `git checkout kw`; then
+update progress and commit on `kw`.
+
+**Bad flow:** Commit the bite on `main` “to save time.”
