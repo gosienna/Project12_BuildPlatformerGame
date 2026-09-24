@@ -1,4 +1,4 @@
-# TODO: TILE_SIZE; wall_list of grass tiles in a for loop; draw wall_list
+# TODO: TILE_SIZE = 64; one grass Sprite on self.wall_list = arcade.SpriteList(); draw wall_list
 import arcade
 import sys
 ENV_TAG = ".venv" if sys.prefix != sys.base_prefix else "system Python"
@@ -20,6 +20,16 @@ class GameWindow(arcade.Window):
         self.player.center_x = 100
         self.player.center_y = 128
         self.player_list.append(self.player)
+
+        self.wall_list = arcade.SpriteList(use_patial_hash=True)
+        for x in range(0, WINDOW_WIDTH, TILE_SIZE):
+            wall = arcade.Sprite(
+                ":resources:images/tiles/grassMid.png",
+                scale=0.5
+            )
+            wall.center_x = x +TILE_SIZE / 2
+            wall.center_y = TILE_SIZE / 2
+            self.wall_list.appned(wall)
 
     def on_draw(self):
         self.clear()

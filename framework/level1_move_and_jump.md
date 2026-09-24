@@ -29,17 +29,29 @@ Along the way, the child also learns the **terminal** and the **`.venv`** throug
 
 Prerequisite: **[Level 0 quick check](level0_setup.md) passed** (Python 3.10+, Arcade 3.x, a window opened).
 
-Progress: **waiting for user to create `level1.py`** → then bite 1 (empty window)
+Live checkboxes and status live in **`progress/level1_move_and_jump.md`**, not here. The learner creates `level1.py` themselves before bite 1.
 
-Terminal quests (**T1 to T5**) sit between the game bites. **Pacing rule:** the instructor gives one command at a time, asks the child to *predict* what will happen, then they run it. Each quest takes about 3 minutes. Windows equivalents are in brackets.
+**Grow `level1.py` one component at a time** (see instructor skill *Growing a script*). Do not hand the child class + `main()` + constants together. After every bite the script must still run and show something new.
 
-- [ ] **1.** Open an empty window with a background color and check that it runs.
-- [ ] **T1. The run loop** (window is open, so the effect is visible)
+Terminal quests (**T1** to **T5**) sit between the game bites. **Pacing rule:** the instructor gives one command at a time, asks the child to *predict* what will happen, then they run it. Each quest takes about 3 minutes. Windows equivalents are in brackets.
+
+### Grow the script
+
+1. **Entry point.** `def main()` that only `print`s a message, then call `main()` at the bottom. Observe: the message appears in the terminal.
+2. **Plain window (no class).** Inside `main()`: `import arcade`, open `arcade.Window(...)`, call `arcade.run()`. Observe: a window opens.
+3. **Class.** Wrap in `class GameWindow(arcade.Window)` with `__init__` + `super().__init__(...)`; `main()` creates `GameWindow()`. Observe: window still opens; a `print` in `__init__` proves the class ran.
+4. **Constants.** Replace magic numbers with `WINDOW_WIDTH`, `WINDOW_HEIGHT`, `WINDOW_TITLE`. Observe: change a constant and the window size or title changes.
+5. **Background.** Set `self.background_color` in `__init__`. Observe: window fills with a color.
+6. **Draw.** Add `on_draw` with `self.clear()`. Observe: colored window still draws cleanly each frame.
+
+### Terminal quests + rest of the level
+
+- **T1. The run loop** (window is open, so the effect is visible)
   1. `pwd` [`cd`] shows the folder the terminal is standing in. `ls` [`dir`] shows `level1.py` in it.
   2. `python level1.py` opens the window. Close it with the X button, then run it again and stop it with `Ctrl+C` in the terminal instead.
   3. Change the background color in the editor and **save**. In the terminal press `↑` then `Enter` (the last command comes back), and the window returns in the new color.
   4. Repeat with 3 colors. The child now has the **edit → save → run** loop.
-- [ ] **T2. Which Python opened this window?** Add the label below, so the window title shows the answer.
+- **T2. Which Python opened this window?** Add the label below, so the window title shows the answer.
   ```python
   import sys                                                        # NEW
   ENV_TAG = ".venv" if sys.prefix != sys.base_prefix else "system Python"   # NEW
@@ -47,27 +59,29 @@ Terminal quests (**T1 to T5**) sit between the game bites. **Pacing rule:** the 
   super().__init__(WINDOW_WIDTH, WINDOW_HEIGHT, f"Platformer ({ENV_TAG})")  # NEW
   ```
   Treat the two lines as a magic label for now. Run the game, and the title bar reads **Platformer (.venv)**. Then `which python` [`where python`] shows a path ending in `.venv/bin/python` [`.venv\Scripts\python.exe`]. That is the Python that opened the window.
-- [ ] **2.** Create the player sprite at a start position and draw it.
-- [ ] **3.** Build the ground row with a loop and draw it.
-- [ ] **T3. Turn the toolbox off** (the game is now worth protecting)
+- **7.** Create the player sprite at a start position and draw it.
+- **8a.** `TILE_SIZE` + **one** grass tile on a new `wall_list` (plain `SpriteList()` — same pattern as `player_list`) and draw it.
+- **8b.** `for` loop with `range(0, WINDOW_WIDTH, TILE_SIZE)` to fill a full ground row.
+- **8c.** Add `use_spatial_hash=True` on `wall_list` alone (looks the same; helps collision later).
+- **T3. Turn the toolbox off** (the game is now worth protecting)
   1. Type `deactivate`. The `(.venv)` in the prompt disappears.
   2. `python3 level1.py`. **Usually the window never appears** and the terminal says `No module named 'arcade'`. (If the computer has arcade installed globally, the title says "system Python" instead.)
   3. Activate again (`source .venv/bin/activate` [`.venv\Scripts\activate`]) and run it. The game and the `(.venv)` title are back.
   4. Now run `.venv/bin/python level1.py` [`.venv\Scripts\python level1.py`] **without activating**. It still works, and the title still says `.venv`. Lesson: "activate" only changes which `python` the terminal finds first.
   5. Ask: *"Where does arcade live?"* Answer: inside `.venv`. That is why `.venv` exists: **a private toolbox for one project**.
-- [ ] **4.** Add the boxes from a list of positions.
-- [ ] **5.** Create the physics engine and call `physics_engine.update()` in `on_update`.
-- [ ] **6a.** Keyboard flags: on press/release set/clear `left_pressed` / `right_pressed`.
-- [ ] **6b.** In `on_update`, set `change_x` from flags (`0`, then `-SPEED` / `+SPEED`).
-- [ ] **6c.** Jump: on jump key, **only if** `can_jump()`, set `change_y = JUMP_POWER`.
-- [ ] **7.** Clamp the player to the window edges after the physics update.
-- [ ] **8.** Add "TRY THIS" comments that point at the tunable constants. The child changes a constant, saves, and uses `↑` + `Enter` to re-run (the T1 loop) to see the effect at once.
-- [ ] **T4. Peek inside the toolbox** (a finished game to look after)
+- **9.** Add the boxes from a list of positions.
+- **10.** Create the physics engine and call `physics_engine.update()` in `on_update`.
+- **11a.** Keyboard flags: on press/release set/clear `left_pressed` / `right_pressed`.
+- **11b.** In `on_update`, set `change_x` from flags (`0`, then `-SPEED` / `+SPEED`).
+- **11c.** Jump: on jump key, **only if** `can_jump()`, set `change_y = JUMP_POWER`.
+- **12.** Clamp the player to the window edges after the physics update.
+- **13.** Add "TRY THIS" comments that point at the tunable constants. The child changes a constant, saves, and uses `↑` + `Enter` to re-run (the T1 loop) to see the effect at once.
+- **T4. Peek inside the toolbox** (a finished game to look after)
   1. `ls .venv/bin` [`dir .venv\Scripts`] shows `python`, `pip` and `activate`. `.venv` is just a folder.
   2. `pip list` shows a short list including `arcade`. (Arcade brings its own helpers, and that's fine.)
   3. `pip show arcade` has a `Location:` line that points **inside `.venv`**.
   4. Ask: *"Why not install arcade for the whole computer?"* A good answer: other projects may need other versions, and a mistake stays inside one folder that can be deleted.
-- [ ] **T5. Bonus: break it and rebuild it.**
+- **T5. Bonus: break it and rebuild it.**
   1. `deactivate`, then `rm -rf .venv` [`rmdir /s /q .venv`]. Run the game: it fails, so the window is gone.
   2. Rebuild with the three **Fix B** commands from Level 0. Run the game: the window is back, and `level1.py` was never touched. `.venv` is disposable and the project files are safe.
 

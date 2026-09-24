@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 8 of 23** — waiting for ground row of grass tiles
+Progress: **bite 8a of ~25** — waiting for one grass tile on `wall_list`
 
 ## Bites
 
@@ -24,7 +24,9 @@ Progress: **bite 8 of 23** — waiting for ground row of grass tiles
 - [x] **T1c.** Change background color, save, re-run with `↑` + `Enter` (try 3 colors)
 - [x] **T2.** Add `ENV_TAG` so the title reads `Platformer (.venv)`; confirm with `which python`
 - [x] **7.** Create the player sprite at a start position and draw it
-- [ ] **8.** Build the ground row with a loop and draw it
+- [ ] **8a.** `TILE_SIZE` + one grass tile on a new `wall_list` (plain `SpriteList()`, no spatial hash yet) and draw it
+- [ ] **8b.** `for` loop with `range(..., TILE_SIZE)` to fill a full ground row
+- [ ] **8c.** Add `use_spatial_hash=True` on `wall_list` (same look; ready for physics later)
 - [ ] **T3a.** `deactivate`, then `python3 level1.py` — usually no window / no arcade
 - [ ] **T3b.** Activate again and run — game + `(.venv)` title back
 - [ ] **T3c.** Run `.venv/bin/python level1.py` without activating — still works; say where arcade lives
