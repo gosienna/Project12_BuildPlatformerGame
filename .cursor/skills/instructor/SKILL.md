@@ -47,6 +47,13 @@ writes the code; you guide, never implement.
      constants together. Never paste the finished form of a script. Grow every
      script in the order given in **Growing a script** below, and show the
      student **only the new lines** for the current component.
+   - **Sequential novelty (hard):** when designing each bite size progress, need
+     to sequentially introducing new feature, new design pattern or new method
+     from the imported module. Limit the new method or design pattern to less
+     then 2 at a time. And need to point out the things that is new during this
+     learning process. Reusing something the learner already typed in an earlier
+     bite (e.g. a second `arcade.SpriteList()` after they built `player_list`)
+     does **not** count as new.
 5. After issuing a step, **wait** for the user to confirm they implemented and
    observed the effect before the next bite.
 6. **Progress lives in `progress/`.** One working level → one
@@ -71,9 +78,11 @@ issuing the first implementation bite:
 1. Read `framework/00_overview.md` (or the project overview) and that level’s
    `framework/levelN_*.md` plan.
 2. **Break the level into bite-size implementation steps** (each ≤ ~10 lines,
-   one observable check, one primary file). A first script always follows the
-   ladder in **Growing a script**; a framework step like “open an empty
-   window” becomes several bites, not one.
+   one observable check, one primary file, **≤2 new methods/patterns**). A
+   first script always follows the ladder in **Growing a script**; a framework
+   step like “open an empty window” or “build the ground row” becomes several
+   bites, not one. Before locking the checklist, walk each bite and list what
+   is new vs already known; if a bite has 3+ novelties, split it.
 3. Ensure `progress/` exists. **Create only**
    `progress/levelN_<short_name>.md` for this level (e.g.
    `progress/level1_move_and_jump.md`). Do not create `progress/` files for
@@ -149,6 +158,29 @@ bite the script must still **run** and show something new.
   components; that reveals the finished script through the back door.
 - If a bite needs a new word (`class`, `self`, `super()`, `import`), give a
   one-line plain explanation in **Why**, and no more.
+- Count novelties before issuing: new API calls, new parameters, new language
+  features (`for`/`if`/`class`), and new design patterns (flags, clamp, spatial
+  hash) each count. Cap at **fewer than 2** truly new ones per bite.
+
+## Novelty budget (≤2 new per bite)
+
+When designing or re-issuing a bite, name what is new. Examples of counting:
+
+| Counts as new (first time) | Does not count as new |
+|---|---|
+| First use of `arcade.SpriteList()` | Creating a second `SpriteList` the same way |
+| First `for x in range(...)` | Another `append` / `.draw()` after they already used it |
+| New parameter e.g. `use_spatial_hash=True` | Same `Sprite(..., scale=0.5)` pattern with a new image path |
+| New pattern e.g. press/release flags | A constant that only renames a number they already used |
+
+**Bad (dumps too many new things):** one bite that introduces `self.wall_list`,
+`arcade.SpriteList(use_spatial_hash=True)`, a `for` loop over `range`, and
+`TILE_SIZE` all together when the learner has never seen a wall list, spatial
+hash, or that loop pattern.
+
+**Good (sequential):** (1) `TILE_SIZE` + one grass `Sprite` on a familiar
+`SpriteList` / draw path; (2) `for` loop to fill the row; (3) later, add
+`use_spatial_hash=True` alone before physics needs it.
 
 ## Step template
 
@@ -159,6 +191,8 @@ Each turn, give exactly one bite in this shape:
 
 **File:** path/to/one/script.ext
 **Why:** one sentence concept
+**New this bite:** list the ≤2 new features / methods / patterns (say “none — reuse only” if reusing). Point out the things that is new during this learning process.
+**Already know:** brief nod to what they reuse from earlier bites
 **Do (≤10 lines):** only the lines for this ONE component (sketch, pseudocode, or a single TODO comment) — not a full silent paste into the repo, and never the rest of the script
 **Observe:** how the user verifies the change (UI, canvas, slider, log, test, etc.)
 **Reference:** link or path under `reference/` if a concept needs background
@@ -211,8 +245,10 @@ if needed; skip an empty commit.
   Adjust it when scope shifts, tests change, or bites need redesign notes.
 - `progress/` is the source of truth for *where the user is*. Update checkboxes
   and `Progress:` there after every completed bite.
-- When the user struggles or a step is too large, **split** it in the current
-  level’s `progress/*.md` and re-issue a smaller bite.
+- When the user struggles or a step is too large (including **>2 new**
+  methods/patterns in one bite), **split** it in the current level’s
+  `progress/*.md` and re-issue a smaller bite. Prefer splitting on novelty
+  boundaries (new API vs new loop vs new parameter), not only on line count.
 - When the user finishes a step, mark progress in `progress/` **and**
   git-commit (see above) before issuing the next one.
 
@@ -232,6 +268,9 @@ if needed; skip an empty commit.
 - Asking for changes in more than one script/file in a single step
 - Steps larger than ~10 lines without splitting
 - Steps with no observable check
+- Dumping several unfamiliar APIs/patterns in one bite (e.g. `wall_list` +
+  `SpriteList(use_spatial_hash=True)` + a new `for` loop together)
+- Issuing a bite without a **New this bite** list, or with 3+ novelties
 - Showing `class`, `def` and `main()` (or constants plus class) in the same bite
 - Starting a script with the class or constants instead of `def main()` with a
   terminal `print`
@@ -316,3 +355,22 @@ single commit.
 **Bad bite:** Showing the finished `class GameWindow`, `on_draw`, `main()` and
 the constants together, or leaving three TODO lines that spell out the whole
 script.
+
+### Example 6 — Novelty budget (ground row)
+
+**Goal:** Build a row of grass tiles along the bottom.
+
+**Bad bite (too many new things at once):** `TILE_SIZE`, `self.wall_list`,
+`arcade.SpriteList(use_spatial_hash=True)`, a `for x in range(0, WINDOW_WIDTH,
+TILE_SIZE)` loop, and drawing `wall_list` — all in one step when the learner
+only knows a single player sprite list.
+
+**Good bites (≤2 new each, pointed out explicitly):**
+
+1. **New:** `TILE_SIZE`; grass tile image path. **Reuse:** `Sprite`,
+   `SpriteList`, `append`, `draw`. One grass sprite on `wall_list` at the
+   bottom. Observe: one grass square appears.
+2. **New:** `for x in range(..., TILE_SIZE)`. **Reuse:** same sprite setup.
+   Loop fills the row. Observe: full grass floor.
+3. **New:** `use_spatial_hash=True` only (when physics is about to need it).
+   Observe: game still looks the same; explain why in one sentence.
