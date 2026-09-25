@@ -50,7 +50,9 @@ class GameWindow(arcade.Window):
         self.player_list.draw()
         self.wall_list.draw()
 
-    # TODO: def on_key_press(self, key, modifiers): print(key)
+    # TODO: if key == arcade.key.LEFT: self.left_pressed = True and print it
+    def on_key_press(self, key, modifier):
+        print(key)
     
     def on_update(self, delta_time):
         self.physics_engine.update()
