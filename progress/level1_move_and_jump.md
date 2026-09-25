@@ -39,3 +39,5 @@ Progress: **bite 8b of ~25** — waiting for a full grass row
 - [ ] **13.** Add "TRY THIS" comments; change a constant, save, re-run with `↑` + `Enter`
 - [ ] **T4.** Peek inside the toolbox (`ls .venv/bin`, `pip list`, `pip show arcade`) + why not install globally
 - [ ] **T5.** (Bonus) Delete `.venv`, see the game fail, rebuild with Fix B
+- [ ] **14.** Create `game/`, move `level1.py` into it, and run `python game/level1.py` once — the window from that file is the start of the game
+- [ ] **15.** Start `.venv/bin/python .cursor/skills/instructor/scripts/watch_game.py`; saving any `.py` inside `game/` reopens the window; stop with `Ctrl+C`
