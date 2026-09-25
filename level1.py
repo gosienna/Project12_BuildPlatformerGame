@@ -1,4 +1,3 @@
-# TODO: 8c — use_spatial_hash=True is already on wall_list; confirm the grass row looks the same
 import arcade
 import sys
 ENV_TAG = ".venv" if sys.prefix != sys.base_prefix else "system Python"
