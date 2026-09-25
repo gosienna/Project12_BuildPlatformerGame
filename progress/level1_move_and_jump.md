@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 10b of ~27** — waiting for the character to fall onto the grass
+Progress: **bite 10a-tune of ~31** — waiting to change `set_update_rate` and see `delta_time` change
 
 ## Bites
 
@@ -33,10 +33,14 @@ Progress: **bite 10b of ~27** — waiting for the character to fall onto the gra
 - [x] **9a.** One box sprite on `wall_list`, sitting on the grass
 - [x] **9b.** A list of `(x, y)` positions and a `for` loop that places the rest of the boxes
 - [x] **10a.** `on_update` prints `delta_time` each frame — numbers around 0.017
-- [ ] **10b.** Create the physics engine and call `physics_engine.update()` so the character falls onto the grass
+- [ ] **10a-tune.** `self.set_update_rate(1/30)` then back to `1/60` — printed `delta_time` grows to about twice as large, then returns near 0.017
+- [ ] **10b.** Create the physics engine with `gravity_constant=1` and call `physics_engine.update()` so the character falls onto the grass
+- [ ] **10c.** Change `gravity_constant` to `0.3`, then `2` — fall is slow, then fast; set it back to `1`
 - [ ] **11a.** Keyboard flags: press/release set/clear `left_pressed` / `right_pressed`
 - [ ] **11b.** In `on_update`, set `change_x` from flags
+- [ ] **11b-tune.** Change `PLAYER_SPEED` — walking is slower, then faster; set it back
 - [ ] **11c.** Jump: only if `can_jump()`, set `change_y = JUMP_POWER`
+- [ ] **11c-tune.** Change `JUMP_POWER` — the jump is shorter, then higher; set it back
 - [ ] **12.** Clamp the player to the window edges after physics update
 - [ ] **13.** Add "TRY THIS" comments; change a constant, save, re-run with `↑` + `Enter`
 - [ ] **T4.** Peek inside the toolbox (`ls .venv/bin`, `pip list`, `pip show arcade`) + why not install globally
