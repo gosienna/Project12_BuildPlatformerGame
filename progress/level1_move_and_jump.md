@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 9b of ~26** — waiting for boxes from a list of positions
+Progress: **bite 10a of ~27** — waiting for `on_update` to print each frame
 
 ## Bites
 
@@ -31,8 +31,9 @@ Progress: **bite 9b of ~26** — waiting for boxes from a list of positions
 - [x] **T3b.** Activate again and run — game + `(.venv)` title back
 - [x] **T3c.** Run `.venv/bin/python level1.py` without activating — window still opens; `arcade` lives inside `.venv`
 - [x] **9a.** One box sprite on `wall_list`, sitting on the grass
-- [ ] **9b.** A list of `(x, y)` positions and a `for` loop that places the rest of the boxes
-- [ ] **10.** Create the physics engine and call `physics_engine.update()` in `on_update`
+- [x] **9b.** A list of `(x, y)` positions and a `for` loop that places the rest of the boxes
+- [ ] **10a.** `on_update` prints `delta_time` each frame — character still floats
+- [ ] **10b.** Create the physics engine and call `physics_engine.update()` so the character falls onto the grass
 - [ ] **11a.** Keyboard flags: press/release set/clear `left_pressed` / `right_pressed`
 - [ ] **11b.** In `on_update`, set `change_x` from flags
 - [ ] **11c.** Jump: only if `can_jump()`, set `change_y = JUMP_POWER`

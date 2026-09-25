@@ -31,16 +31,19 @@ class GameWindow(arcade.Window):
             grass.center_y = TILE_SIZE / 2
             self.wall_list.append(grass)
 
-        # TODO: BOXES = [(x, y), ...]; for x, y in BOXES: place a box sprite
-        box = arcade.Sprite(":resources:images/tiles/boxCrate_double.png", scale=0.5)
-        box.center_x = 400
-        box.center_y = 96
-        self.wall_list.append(box)
+        BOXES = [(256,96),(400,160),(544,224)]
+        for x, y in BOXES:    
+            box = arcade.Sprite(":resources:images/tiles/boxCrate_double.png", scale=0.5)
+            box.center_x = x
+            box.center_y = y
+            self.wall_list.append(box)
 
     def on_draw(self):
         self.clear()
         self.player_list.draw()
         self.wall_list.draw()
+
+    # TODO: def on_update(self, delta_time): print(delta_time)
 
 def main():
     window = GameWindow()
