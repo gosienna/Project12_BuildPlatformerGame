@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite T3b of ~25** — activate the toolbox and open the game
+Progress: **bite T3c of ~25** — run with the toolbox path, without activating
 
 ## Bites
 
@@ -28,7 +28,7 @@ Progress: **bite T3b of ~25** — activate the toolbox and open the game
 - [x] **8b.** `for` loop with `range(..., TILE_SIZE)` to fill a full ground row
 - [x] **8c.** `use_spatial_hash=True` on `wall_list` (same look; ready for physics later)
 - [x] **T3a.** `deactivate`, then `python3 level1.py` — `No module named 'arcade'`
-- [ ] **T3b.** Activate again and run — game + `(.venv)` title back
+- [x] **T3b.** Activate again and run — game + `(.venv)` title back
 - [ ] **T3c.** Run `.venv/bin/python level1.py` without activating — still works; say where arcade lives
 - [ ] **9.** Add the boxes from a list of positions
 - [ ] **10.** Create the physics engine and call `physics_engine.update()` in `on_update`
