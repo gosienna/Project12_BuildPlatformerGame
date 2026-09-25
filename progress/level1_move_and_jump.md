@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 8b of ~25** — waiting for a full grass row
+Progress: **bite 8c of ~25** — confirm spatial hash, grass row unchanged
 
 ## Bites
 
@@ -25,7 +25,7 @@ Progress: **bite 8b of ~25** — waiting for a full grass row
 - [x] **T2.** Add `ENV_TAG` so the title reads `Platformer (.venv)`; confirm with `which python`
 - [x] **7.** Create the player sprite at a start position and draw it
 - [x] **8a.** `TILE_SIZE` + one grass tile on a new `wall_list` and draw it (`use_spatial_hash=True` already present; revisit in 8c)
-- [ ] **8b.** `for` loop with `range(..., TILE_SIZE)` to fill a full ground row
+- [x] **8b.** `for` loop with `range(..., TILE_SIZE)` to fill a full ground row
 - [ ] **8c.** Add `use_spatial_hash=True` on `wall_list` (same look; ready for physics later)
 - [ ] **T3a.** `deactivate`, then `python3 level1.py` — usually no window / no arcade
 - [ ] **T3b.** Activate again and run — game + `(.venv)` title back

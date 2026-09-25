@@ -1,4 +1,4 @@
-# TODO: replace the one grass sprite with for x in range(0, WINDOW_WIDTH, TILE_SIZE)
+# TODO: 8c — use_spatial_hash=True is already on wall_list; confirm the grass row looks the same
 import arcade
 import sys
 ENV_TAG = ".venv" if sys.prefix != sys.base_prefix else "system Python"
@@ -23,13 +23,14 @@ class GameWindow(arcade.Window):
         self.player_list.append(self.player)
 
         self.wall_list = arcade.SpriteList(use_spatial_hash=True)
-        grass = arcade.Sprite(
-            ":resources:images/tiles/grassMid.png",
-            scale=0.5
-        )
-        grass.center_x = TILE_SIZE / 2
-        grass.center_y = TILE_SIZE / 2
-        self.wall_list.append(grass)
+        for x in range(0, WINDOW_WIDTH, TILE_SIZE):
+            grass = arcade.Sprite(
+                ":resources:images/tiles/grassMid.png",
+                scale=0.5
+            )
+            grass.center_x = x+TILE_SIZE / 2
+            grass.center_y = TILE_SIZE / 2
+            self.wall_list.append(grass)
 
     def on_draw(self):
         self.clear()
