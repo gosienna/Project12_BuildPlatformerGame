@@ -52,7 +52,7 @@ class GameWindow(arcade.Window):
         self.player_list.draw()
         self.wall_list.draw()
 
-    # TODO: on_key_release sets the matching flag to False and prints it
+    # TODO: in on_update, set player.change_x from the flags, then update physics
     def on_key_press(self, key, modifier):
         if key == arcade.key.LEFT:
             self.left_pressed = True
@@ -60,6 +60,14 @@ class GameWindow(arcade.Window):
         if key == arcade.key.RIGHT:
             self.right_pressed = True
             print("right", self.right_pressed)
+
+    def on_key_release(self, key, modifier):
+        if key == arcade.key.LEFT:
+            self.left_pressed = False
+            print("left released", self.left_pressed)
+        if key == arcade.key.RIGHT:
+            self.right_pressed = False
+            print("right released", self.right_pressed)
     
     def on_update(self, delta_time):
         self.physics_engine.update()
