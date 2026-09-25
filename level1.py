@@ -13,6 +13,7 @@ class GameWindow(arcade.Window):
         print("GameWindow created")
         self.set_update_rate(1/60)
         self.left_pressed = False
+        self.right_pressed = False
         self.background_color = arcade.color.AMAZON
         self.player_list = arcade.SpriteList()
         self.player = arcade.Sprite(
@@ -51,11 +52,14 @@ class GameWindow(arcade.Window):
         self.player_list.draw()
         self.wall_list.draw()
 
-    # TODO: start both flags False; if RIGHT, set right_pressed True and print it
+    # TODO: on_key_release sets the matching flag to False and prints it
     def on_key_press(self, key, modifier):
         if key == arcade.key.LEFT:
             self.left_pressed = True
-            print(self.left_pressed)
+            print("left",self.left_pressed)
+        if key == arcade.key.RIGHT:
+            self.right_pressed = True
+            print("right", self.right_pressed)
     
     def on_update(self, delta_time):
         self.physics_engine.update()
