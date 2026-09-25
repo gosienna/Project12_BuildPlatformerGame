@@ -37,15 +37,21 @@ class GameWindow(arcade.Window):
             box.center_x = x
             box.center_y = y
             self.wall_list.append(box)
+        
+        self.physics_engine = arcade.PhysicsEnginePlatformer(
+            self.player,
+            walls=self.wall_list,
+            gravity_constant=0.1,
+        )
 
     def on_draw(self):
         self.clear()
         self.player_list.draw()
         self.wall_list.draw()
 
-    # TODO: physics engine in __init__; on_update calls physics_engine.update()
+    # TODO: self.set_update_rate(1/30), print(delta_time), then set the rate back to 1/60 and remove the print
     def on_update(self, delta_time):
-        print(delta_time)
+        self.physics_engine.update()
 
 def main():
     window = GameWindow()

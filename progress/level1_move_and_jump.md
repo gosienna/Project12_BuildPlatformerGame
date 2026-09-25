@@ -34,7 +34,7 @@ Progress: **bite 10a-tune of ~31** — waiting to change `set_update_rate` and s
 - [x] **9b.** A list of `(x, y)` positions and a `for` loop that places the rest of the boxes
 - [x] **10a.** `on_update` prints `delta_time` each frame — numbers around 0.017
 - [ ] **10a-tune.** `self.set_update_rate(1/30)` then back to `1/60` — printed `delta_time` grows to about twice as large, then returns near 0.017
-- [ ] **10b.** Create the physics engine with `gravity_constant=1` and call `physics_engine.update()` so the character falls onto the grass
+- [x] **10b.** Physics engine calls `update()` — character falls onto the grass (`gravity_constant` is `0.1` for now; set back to `1` in 10c)
 - [ ] **10c.** Change `gravity_constant` to `0.3`, then `2` — fall is slow, then fast; set it back to `1`
 - [ ] **11a.** Keyboard flags: press/release set/clear `left_pressed` / `right_pressed`
 - [ ] **11b.** In `on_update`, set `change_x` from flags
