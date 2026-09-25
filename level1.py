@@ -10,6 +10,7 @@ TILE_SIZE = 64
 class GameWindow(arcade.Window):
     def __init__(self):
         super().__init__(WINDOW_WIDTH, WINDOW_HEIGHT, f"Platformer ({ENV_TAG})")
+        self.set_update_rate(1/60)
         print("GameWindow created")
         self.background_color = arcade.color.AMAZON
         self.player_list = arcade.SpriteList()
@@ -18,7 +19,7 @@ class GameWindow(arcade.Window):
             scale=0.5,
         )
         self.player.center_x = 100
-        self.player.center_y = 128
+        self.player.center_y = 228
         self.player_list.append(self.player)
 
         self.wall_list = arcade.SpriteList(use_spatial_hash=True)
@@ -49,7 +50,8 @@ class GameWindow(arcade.Window):
         self.player_list.draw()
         self.wall_list.draw()
 
-    # TODO: self.set_update_rate(1/30), print(delta_time), then set the rate back to 1/60 and remove the print
+    # TODO: gravity_constant 0.3, then 2, then set it back to 1
+    
     def on_update(self, delta_time):
         self.physics_engine.update()
 
