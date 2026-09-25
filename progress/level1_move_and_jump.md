@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 11b of ~34** — waiting for the character to walk from the flags
+Progress: **bite 11b-tune of ~34** — waiting to walk slower, then faster, then set speed back to 5
 
 ## Bites
 
@@ -40,7 +40,7 @@ Progress: **bite 11b of ~34** — waiting for the character to walk from the fla
 - [x] **11a-left.** `if` the key is LEFT, set `left_pressed = True` and print it
 - [x] **11a-right.** Same pattern for `right_pressed`
 - [x] **11a-release.** `on_key_release` sets the matching flag back to `False`
-- [ ] **11b.** In `on_update`, set `change_x` from flags
+- [x] **11b.** In `on_update`, set `change_x` from flags — walks left and right, stops when released
 - [ ] **11b-tune.** Change `PLAYER_SPEED` — walking is slower, then faster; set it back
 - [ ] **11c.** Jump: only if `can_jump()`, set `change_y = JUMP_POWER`
 - [ ] **11c-tune.** Change `JUMP_POWER` — the jump is shorter, then higher; set it back

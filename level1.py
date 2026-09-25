@@ -6,6 +6,7 @@ WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 WINDOW_TITLE = "Platformer"
 TILE_SIZE = 64
+PLAYER_SPEED = 5
 
 class GameWindow(arcade.Window):
     def __init__(self):
@@ -52,24 +53,27 @@ class GameWindow(arcade.Window):
         self.player_list.draw()
         self.wall_list.draw()
 
-    # TODO: in on_update, set player.change_x from the flags, then update physics
+    # TODO: PLAYER_SPEED 2, then 12, then set it back to 5
     def on_key_press(self, key, modifier):
         if key == arcade.key.LEFT:
             self.left_pressed = True
-            print("left",self.left_pressed)
         if key == arcade.key.RIGHT:
             self.right_pressed = True
-            print("right", self.right_pressed)
 
     def on_key_release(self, key, modifier):
         if key == arcade.key.LEFT:
             self.left_pressed = False
-            print("left released", self.left_pressed)
         if key == arcade.key.RIGHT:
             self.right_pressed = False
-            print("right released", self.right_pressed)
     
     def on_update(self, delta_time):
+        
+        if self.right_pressed:
+            self.player.change_x = PLAYER_SPEED
+        elif self.left_pressed:
+            self.player.change_x = -PLAYER_SPEED
+        else:
+            self.player.change_x = 0
         self.physics_engine.update()
 
 def main():
