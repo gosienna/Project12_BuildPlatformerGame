@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 9a of ~26** — waiting for one box on the grass
+Progress: **bite 9b of ~26** — waiting for boxes from a list of positions
 
 ## Bites
 
@@ -30,7 +30,7 @@ Progress: **bite 9a of ~26** — waiting for one box on the grass
 - [x] **T3a.** `deactivate`, then `python3 level1.py` — `No module named 'arcade'`
 - [x] **T3b.** Activate again and run — game + `(.venv)` title back
 - [x] **T3c.** Run `.venv/bin/python level1.py` without activating — window still opens; `arcade` lives inside `.venv`
-- [ ] **9a.** One box sprite on `wall_list`, sitting on the grass
+- [x] **9a.** One box sprite on `wall_list`, sitting on the grass
 - [ ] **9b.** A list of `(x, y)` positions and a `for` loop that places the rest of the boxes
 - [ ] **10.** Create the physics engine and call `physics_engine.update()` in `on_update`
 - [ ] **11a.** Keyboard flags: press/release set/clear `left_pressed` / `right_pressed`

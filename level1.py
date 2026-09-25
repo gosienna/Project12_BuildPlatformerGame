@@ -31,7 +31,11 @@ class GameWindow(arcade.Window):
             grass.center_y = TILE_SIZE / 2
             self.wall_list.append(grass)
 
-        # TODO: one box sprite on wall_list, center_x=400, center_y=96
+        # TODO: BOXES = [(x, y), ...]; for x, y in BOXES: place a box sprite
+        box = arcade.Sprite(":resources:images/tiles/boxCrate_double.png", scale=0.5)
+        box.center_x = 400
+        box.center_y = 96
+        self.wall_list.append(box)
 
     def on_draw(self):
         self.clear()
