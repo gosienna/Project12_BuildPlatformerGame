@@ -42,7 +42,7 @@ class GameWindow(arcade.Window):
         self.physics_engine = arcade.PhysicsEnginePlatformer(
             self.player,
             walls=self.wall_list,
-            gravity_constant=0.1,
+            gravity_constant=1,
         )
 
     def on_draw(self):
@@ -50,7 +50,7 @@ class GameWindow(arcade.Window):
         self.player_list.draw()
         self.wall_list.draw()
 
-    # TODO: gravity_constant 0.3, then 2, then set it back to 1
+    # TODO: def on_key_press(self, key, modifiers): print(key)
     
     def on_update(self, delta_time):
         self.physics_engine.update()

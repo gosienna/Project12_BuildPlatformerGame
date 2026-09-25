@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 10c of ~31** — waiting to slow the fall, then speed it up, then set gravity back to 1
+Progress: **bite 11a of ~34** — waiting for `on_key_press` to print the key number
 
 ## Bites
 
@@ -35,8 +35,11 @@ Progress: **bite 10c of ~31** — waiting to slow the fall, then speed it up, th
 - [x] **10a.** `on_update` prints `delta_time` each frame — numbers around 0.017
 - [x] **10a-tune.** `set_update_rate(1/30)` printed about 0.034; rate `1` printed about 1.0; set back to `1/60` and removed the print
 - [x] **10b.** Physics engine calls `update()` — character falls onto the grass (`gravity_constant` is `0.1` for now; set back to `1` in 10c)
-- [ ] **10c.** Change `gravity_constant` to `0.3`, then `2` — fall is slow, then fast; set it back to `1`
-- [ ] **11a.** Keyboard flags: press/release set/clear `left_pressed` / `right_pressed`
+- [x] **10c.** `gravity_constant` 0.3 falls slowly, 2 falls fast, then set back to `1`
+- [ ] **11a.** `on_key_press` prints the key number — character still does not walk
+- [ ] **11a-left.** `if` the key is LEFT, set `left_pressed = True` and print it
+- [ ] **11a-right.** Same pattern for `right_pressed`
+- [ ] **11a-release.** `on_key_release` sets the matching flag back to `False`
 - [ ] **11b.** In `on_update`, set `change_x` from flags
 - [ ] **11b-tune.** Change `PLAYER_SPEED` — walking is slower, then faster; set it back
 - [ ] **11c.** Jump: only if `can_jump()`, set `change_y = JUMP_POWER`
