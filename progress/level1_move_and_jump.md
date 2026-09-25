@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite T3a of ~25** — turn the toolbox off
+Progress: **bite T3b of ~25** — activate the toolbox and open the game
 
 ## Bites
 
@@ -27,7 +27,7 @@ Progress: **bite T3a of ~25** — turn the toolbox off
 - [x] **8a.** `TILE_SIZE` + one grass tile on a new `wall_list` and draw it (`use_spatial_hash=True` already present; revisit in 8c)
 - [x] **8b.** `for` loop with `range(..., TILE_SIZE)` to fill a full ground row
 - [x] **8c.** `use_spatial_hash=True` on `wall_list` (same look; ready for physics later)
-- [ ] **T3a.** `deactivate`, then `python3 level1.py` — usually no window / no arcade
+- [x] **T3a.** `deactivate`, then `python3 level1.py` — `No module named 'arcade'`
 - [ ] **T3b.** Activate again and run — game + `(.venv)` title back
 - [ ] **T3c.** Run `.venv/bin/python level1.py` without activating — still works; say where arcade lives
 - [ ] **9.** Add the boxes from a list of positions
