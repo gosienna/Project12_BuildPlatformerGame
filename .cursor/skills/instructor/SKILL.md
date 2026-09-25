@@ -34,6 +34,8 @@ writes the code; you guide, never implement.
    - `reference/` (`.md` / `.pdf`) — related learning material
    - Instructional **comments** in a single application file **only if the user
      already created that file themselves**
+   - This skill's own script `.cursor/skills/instructor/scripts/watch_game.py`
+     (curriculum tooling, not game code)
 4. **Bite-size implementation:**
    - One modification must have a corresponding change the user can **observe**
      (e.g. a new draw-line function → a line appears on a web canvas; a fontsize
@@ -71,9 +73,29 @@ writes the code; you guide, never implement.
 
 | Folder | Role |
 |---|---|
+| `game/` | All game scripts and later game modules (`game/level1.py` and any `.py` the learner adds). The learner creates this folder. |
 | `framework/` | Design plan / curriculum (goals, concepts, test ideas). May list all levels. |
 | `progress/` | Live bite checklist + status for levels the user has actually started. |
 | `reference/` | Short concept notes for the current bite. |
+| `.cursor/skills/instructor/scripts/` | Curriculum tools. `watch_game.py` lives here, not inside `game/`. |
+
+**Game folder.** New levels start in `game/`, not the repo root. If the target
+script does not exist, ask the learner to create `game/levelN.py` themselves.
+A level already started at the repo root stays there until that level's plan
+says to move it; do not relocate it mid-bite.
+
+**Auto-rerun.** After the learner has run the starter themselves (so they know
+where the game starts), they may use the skill script from the **repo root**:
+
+```bash
+.venv/bin/python .cursor/skills/instructor/scripts/watch_game.py
+```
+
+It starts `game/level1.py` by default. A later level can pass another starter:
+`.venv/bin/python .cursor/skills/instructor/scripts/watch_game.py game/level2.py`.
+Saving any `.py` under `game/` closes and reopens the window. Saving
+`watch_game.py` itself does not, because the watcher is outside `game/`.
+Stop it with Ctrl+C.
 
 ## Learner branch (required)
 
@@ -93,8 +115,9 @@ own assigned branch name.
    if it does not exist yet). Only then continue.
 4. **Commit scope:** bite commits and `progress/` edits belong only on the
    assigned learner branch. Curriculum-only edits to
-   `.cursor/skills/instructor/SKILL.md` may live on `main`; never put the
-   learner’s `progress/` or application work on `main`.
+   `.cursor/skills/instructor/` ( `SKILL.md` and `scripts/watch_game.py` ) may
+   live on `main`; never put the learner’s `progress/` or application work on
+   `main`.
 5. **Push:** push the learner branch when the user asks (or when continuing a
    remote-backed session). Do not push learner progress to `main`.
 
@@ -154,8 +177,10 @@ them in place** in that same file before teaching.
    matches the current git branch. Use its checklist to pick the next
    incomplete bite. If starting a new level (no progress file yet), run
    **Starting a level** first — create **only** that level’s progress `.md`.
-5. If the step’s target file does not exist, **ask the user to create it** before
-   issuing implementation work or adding comments. Do not create it for them.
+5. If the step’s target file does not exist, **ask the user to create it**
+   under `game/` (for example `game/level1.py`) before issuing implementation
+   work or adding comments. Do not create it for them. A level already started
+   at the repo root keeps that path until its framework plan says to move it.
 6. Tell the user the current step using the template below.
 
 ## Growing a script (component ladder)
@@ -360,12 +385,12 @@ resize.
 
 **Goal:** Start Level 1 with an empty Arcade window.
 
-**Good bite:** Tell the user to create `level1.py` themselves. After they confirm
-it exists, optionally add **one** TODO for the first bite (`def main()` that
-prints a message), then issue that bite.
+**Good bite:** Tell the user to create `game/level1.py` themselves. After they
+confirm it exists, optionally add **one** TODO for the first bite (`def main()`
+that prints a message), then issue that bite.
 
-**Bad bite:** Writing `level1.py` (even as an empty stub with TODOs) before the
-user creates it.
+**Bad bite:** Writing `game/level1.py` (even as an empty stub with TODOs)
+before the user creates it.
 
 ### Example 4 — Level start + progress commit on learner branch
 
