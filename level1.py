@@ -10,8 +10,9 @@ TILE_SIZE = 64
 class GameWindow(arcade.Window):
     def __init__(self):
         super().__init__(WINDOW_WIDTH, WINDOW_HEIGHT, f"Platformer ({ENV_TAG})")
-        self.set_update_rate(1/60)
         print("GameWindow created")
+        self.set_update_rate(1/60)
+        self.left_pressed = False
         self.background_color = arcade.color.AMAZON
         self.player_list = arcade.SpriteList()
         self.player = arcade.Sprite(
@@ -50,9 +51,11 @@ class GameWindow(arcade.Window):
         self.player_list.draw()
         self.wall_list.draw()
 
-    # TODO: if key == arcade.key.LEFT: self.left_pressed = True and print it
+    # TODO: start both flags False; if RIGHT, set right_pressed True and print it
     def on_key_press(self, key, modifier):
-        print(key)
+        if key == arcade.key.LEFT:
+            self.left_pressed = True
+            print(self.left_pressed)
     
     def on_update(self, delta_time):
         self.physics_engine.update()

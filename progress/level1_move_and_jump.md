@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 11a-left of ~34** — waiting for LEFT to set `left_pressed`
+Progress: **bite 11a-right of ~34** — waiting for RIGHT to set `right_pressed`
 
 ## Bites
 
@@ -37,7 +37,7 @@ Progress: **bite 11a-left of ~34** — waiting for LEFT to set `left_pressed`
 - [x] **10b.** Physics engine calls `update()` — character falls onto the grass (`gravity_constant` is `0.1` for now; set back to `1` in 10c)
 - [x] **10c.** `gravity_constant` 0.3 falls slowly, 2 falls fast, then set back to `1`
 - [x] **11a.** `on_key_press` prints the key number — character still does not walk
-- [ ] **11a-left.** `if` the key is LEFT, set `left_pressed = True` and print it
+- [x] **11a-left.** `if` the key is LEFT, set `left_pressed = True` and print it
 - [ ] **11a-right.** Same pattern for `right_pressed`
 - [ ] **11a-release.** `on_key_release` sets the matching flag back to `False`
 - [ ] **11b.** In `on_update`, set `change_x` from flags
