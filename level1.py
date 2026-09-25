@@ -43,7 +43,9 @@ class GameWindow(arcade.Window):
         self.player_list.draw()
         self.wall_list.draw()
 
-    # TODO: def on_update(self, delta_time): print(delta_time)
+    # TODO: physics engine in __init__; on_update calls physics_engine.update()
+    def on_update(self, delta_time):
+        print(delta_time)
 
 def main():
     window = GameWindow()
