@@ -1,4 +1,4 @@
-# TODO: TILE_SIZE = 64; one grass Sprite on self.wall_list = arcade.SpriteList(); draw wall_list
+# TODO: replace the one grass sprite with for x in range(0, WINDOW_WIDTH, TILE_SIZE)
 import arcade
 import sys
 ENV_TAG = ".venv" if sys.prefix != sys.base_prefix else "system Python"
@@ -6,6 +6,7 @@ ENV_TAG = ".venv" if sys.prefix != sys.base_prefix else "system Python"
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 WINDOW_TITLE = "Platformer"
+TILE_SIZE = 64
 
 class GameWindow(arcade.Window):
     def __init__(self):
@@ -21,19 +22,19 @@ class GameWindow(arcade.Window):
         self.player.center_y = 128
         self.player_list.append(self.player)
 
-        self.wall_list = arcade.SpriteList(use_patial_hash=True)
-        for x in range(0, WINDOW_WIDTH, TILE_SIZE):
-            wall = arcade.Sprite(
-                ":resources:images/tiles/grassMid.png",
-                scale=0.5
-            )
-            wall.center_x = x +TILE_SIZE / 2
-            wall.center_y = TILE_SIZE / 2
-            self.wall_list.appned(wall)
+        self.wall_list = arcade.SpriteList(use_spatial_hash=True)
+        grass = arcade.Sprite(
+            ":resources:images/tiles/grassMid.png",
+            scale=0.5
+        )
+        grass.center_x = TILE_SIZE / 2
+        grass.center_y = TILE_SIZE / 2
+        self.wall_list.append(grass)
 
     def on_draw(self):
         self.clear()
         self.player_list.draw()
+        self.wall_list.draw()
 
 def main():
     window = GameWindow()
