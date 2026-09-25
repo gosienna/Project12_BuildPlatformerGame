@@ -56,6 +56,16 @@ writes the code; you guide, never implement.
      learning process. Reusing something the learner already typed in an earlier
      bite (e.g. a second `arcade.SpriteList()` after they built `player_list`)
      does **not** count as new.
+   - **Tune the argument (hard):** when learning is related to a certain
+     argument that is adjustable, let the user tune the argument to see the
+     effect. The bite that introduces the argument uses one clear value. The
+     next bite changes only that number and asks what looks or prints
+     differently, then sets it back. Examples: `delta_time` in Arcade's
+     `on_update` (Arcade measures that number; tune `set_update_rate(1/30)` vs
+     `set_update_rate(1/60)` and watch the printed `delta_time`), and
+     `gravity_constant` in `PhysicsEnginePlatformer` (a small value falls
+     slowly, a large value falls fast). Same rule for `PLAYER_SPEED`,
+     `JUMP_POWER`, and any other knob the learner just met.
 5. After issuing a step, **wait** for the user to confirm they implemented and
    observed the effect before the next bite.
 6. **Progress lives in `progress/`.** One working level → one
@@ -255,6 +265,7 @@ Each turn, give exactly one bite in this shape:
 **Why:** one sentence concept
 **New this bite:** list the ≤2 new features / methods / patterns (say “none — reuse only” if reusing). Point out the things that is new during this learning process.
 **Already know:** brief nod to what they reuse from earlier bites
+**Tune:** if this bite introduces an adjustable argument, say the follow-up bite will change only that number. On the follow-up bite, name the two values and what should look or print differently.
 **Do (≤10 lines):** only the lines for this ONE component (sketch, pseudocode, or a single TODO comment) — not a full silent paste into the repo, and never the rest of the script
 **Observe:** how the user verifies the change (UI, canvas, slider, log, test, etc.)
 **Reference:** link or path under `reference/` if a concept needs background
@@ -339,6 +350,9 @@ if needed; skip an empty commit.
 - Dumping several unfamiliar APIs/patterns in one bite (e.g. `wall_list` +
   `SpriteList(use_spatial_hash=True)` + a new `for` loop together)
 - Issuing a bite without a **New this bite** list, or with 3+ novelties
+- Introducing an adjustable argument (`gravity_constant`, `set_update_rate`,
+  `PLAYER_SPEED`, `JUMP_POWER`) without a later bite that changes only that
+  number and compares the effect
 - Showing `class`, `def` and `main()` (or constants plus class) in the same bite
 - Starting a script with the class or constants instead of `def main()` with a
   terminal `print`
@@ -459,3 +473,22 @@ only knows a single player sprite list.
 update progress and commit on `kw`.
 
 **Bad flow:** Commit the bite on `main` “to save time.”
+
+### Example 8 — Tune an adjustable argument
+
+**Goal:** The learner meets `delta_time` or `gravity_constant`.
+
+**Good bites:**
+
+1. `on_update` prints `delta_time`. Observe: numbers around `0.017`.
+2. **Tune:** `self.set_update_rate(1/30)`, run, printed time is about twice as
+   large; set it back to `1/60`. Arcade still measures `delta_time`; the rate
+   changes how often that measurement happens.
+3. Create the physics engine with `gravity_constant=1`. Observe: the player
+   falls onto the grass.
+4. **Tune:** set `gravity_constant` to `0.3`, then to `2`. Observe: slow fall,
+   then fast fall. Set it back to `1`.
+
+**Bad bite:** Passing `gravity_constant=1` and never changing it, or telling the
+learner to assign `delta_time = 0.5` inside `on_update` as if that number were
+the clock.
