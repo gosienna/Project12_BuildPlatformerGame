@@ -36,6 +36,9 @@ Progress: **waiting for user to create `level1.py`** → then bite 1 (empty wind
 - [ ] **6c.** Jump: on jump key, **only if** `can_jump()`, set `change_y = JUMP_POWER`.
 - [ ] **7.** Clamp the player to the window edges after the physics update.
 - [ ] **8.** Add "TRY THIS" comments that point at the tunable constants.
+- [ ] **9.** Create `game/`, move `level1.py` into it, and run `python game/level1.py` once. That file is the start of the game.
+- [ ] **10.** From the repo root, start `.venv/bin/python .cursor/skills/instructor/scripts/watch_game.py`.
+- [ ] **11.** **Own picture.** Save a drawing or an image from the web as `game/hero.png` (a file on disk, not a web address). `arcade.Sprite` loads a path. Change the player sprite path to `"game/hero.png"` and save `game/level1.py`. The watcher only notices `.py` saves, so dropping the image in alone does not restart the game. After the save, the window reopens and their picture is the hero. Grass and boxes stay on Arcade `:resources:` images.
 
 > Why use flags instead of setting `change_x` directly in `on_key_press`? If you do it directly, then holding RIGHT, tapping LEFT and releasing it stops the player even though RIGHT is still held. Flags avoid that bug.
 
@@ -53,6 +56,7 @@ Progress: **waiting for user to create `level1.py`** → then bite 1 (empty wind
 | Jump onto a box | Lands and stands on top |
 | Walk into a box | Blocked from the side |
 | Reach the highest box via the others | Possible (checks the level can be completed) |
+| Save the player path as `"game/hero.png"` | The watcher reopens the window, and the hero is the child's picture |
 
 ### Automated checks
 - **Lands on ground:** run 120 updates → `can_jump()` is True and `player.bottom ≈ 64`.
@@ -68,3 +72,4 @@ Double `JUMP_POWER`, halve `GRAVITY`, and so on, and describe how it *feels*. Th
 - [ ] All play-test rows pass
 - [ ] Child can point to where the player is created, drawn, and moved
 - [ ] Child has changed at least 2 constants and explained the effect
+- [ ] Child has saved `game/hero.png` as the player path and seen the watcher reopen the window with their picture

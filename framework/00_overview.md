@@ -8,7 +8,7 @@ This folder describes **what to build and how to check it** for each tutorial le
 4. **How to test**: a hands-on play checklist plus automated checks
 5. **Done when**: the checklist for moving on
 
-Target: Python Arcade 3.x (Python 3.10+). Art and sounds come from Arcade's built-in `:resources:` library.
+Target: Python Arcade 3.x (Python 3.10+). Art and sounds come from Arcade's built-in `:resources:` library. Level 1 may use one picture the child saved in `game/` as the player sprite. Other sprites stay on built-in art. No new `pip` package.
 
 **Start with [Level 0: Setup Check](level0_setup.md).** The instructor checks Python, the virtual environment and Arcade before Level 1. If anything is missing, the instructor gives the matching install instructions.
 
