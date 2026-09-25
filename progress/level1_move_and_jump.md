@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 11b-tune of ~34** — waiting to walk slower, then faster, then set speed back to 5
+Progress: **bite 11c of ~34** — waiting for a jump only from the ground
 
 ## Bites
 
@@ -41,7 +41,7 @@ Progress: **bite 11b-tune of ~34** — waiting to walk slower, then faster, then
 - [x] **11a-right.** Same pattern for `right_pressed`
 - [x] **11a-release.** `on_key_release` sets the matching flag back to `False`
 - [x] **11b.** In `on_update`, set `change_x` from flags — walks left and right, stops when released
-- [ ] **11b-tune.** Change `PLAYER_SPEED` — walking is slower, then faster; set it back
+- [x] **11b-tune.** `PLAYER_SPEED` 2 is slow, 12 is fast, then set back to `5`
 - [ ] **11c.** Jump: only if `can_jump()`, set `change_y = JUMP_POWER`
 - [ ] **11c-tune.** Change `JUMP_POWER` — the jump is shorter, then higher; set it back
 - [ ] **12.** Clamp the player to the window edges after physics update
