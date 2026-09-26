@@ -54,7 +54,7 @@ class GameWindow(arcade.Window):
         self.player_list.draw()
         self.wall_list.draw()
 
-    # TODO: JUMP_POWER 8, then 35, then set it back to 20
+    # TODO: after physics update, keep player.left >= 0 and player.right <= WINDOW_WIDTH
     def on_key_press(self, key, modifier):
         if key == arcade.key.LEFT:
             self.left_pressed = True
