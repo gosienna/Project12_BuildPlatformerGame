@@ -6,7 +6,9 @@ WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 WINDOW_TITLE = "Platformer"
 TILE_SIZE = 64
+# 2 walks slowly, 12 walks fast
 PLAYER_SPEED = 5
+# TRY THIS: 8 is a short hop, 35 is a high jump
 JUMP_POWER = 20
 
 class GameWindow(arcade.Window):
@@ -46,6 +48,7 @@ class GameWindow(arcade.Window):
         self.physics_engine = arcade.PhysicsEnginePlatformer(
             self.player,
             walls=self.wall_list,
+            # TRY THIS: 0.3 falls slowly, 2 falls fast
             gravity_constant=1,
         )
 
@@ -54,7 +57,6 @@ class GameWindow(arcade.Window):
         self.player_list.draw()
         self.wall_list.draw()
 
-    # TODO: TRY THIS comments above PLAYER_SPEED, JUMP_POWER, and gravity_constant
     def on_key_press(self, key, modifier):
         if key == arcade.key.LEFT:
             self.left_pressed = True
@@ -77,7 +79,7 @@ class GameWindow(arcade.Window):
             self.player.change_x = -PLAYER_SPEED
         else:
             self.player.change_x = 0
-            
+
         self.physics_engine.update()
         if self.player.left < 0:
             self.player.left = 0

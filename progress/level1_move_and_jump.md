@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 13 of ~34** — waiting for TRY THIS notes, then one constant change with ↑ + Enter
+Progress: **bite T4a of ~36** — waiting to list the toolbox folder
 
 ## Bites
 
@@ -45,8 +45,10 @@ Progress: **bite 13 of ~34** — waiting for TRY THIS notes, then one constant c
 - [x] **11c.** Jump: only if `can_jump()`, set `change_y = JUMP_POWER`
 - [x] **11c-tune.** `JUMP_POWER` 8 is a short hop, 35 is a high jump, then set back to `20`
 - [x] **12.** Clamp the player to the window edges after physics update
-- [ ] **13.** Add "TRY THIS" comments; change a constant, save, re-run with `↑` + `Enter`
-- [ ] **T4.** Peek inside the toolbox (`ls .venv/bin`, `pip list`, `pip show arcade`) + why not install globally
+- [x] **13.** TRY THIS notes on speed, jump, and gravity; speed set back to `5`
+- [ ] **T4a.** `ls .venv/bin` — see `python`, `pip`, and `activate`
+- [ ] **T4b.** `pip list` — `arcade` is in the short list
+- [ ] **T4c.** `pip show arcade` — `Location:` is inside `.venv`; say why not install arcade for the whole computer
 - [ ] **T5.** (Bonus) Delete `.venv`, see the game fail, rebuild with Fix B
 - [ ] **14.** Create `game/`, move `level1.py` into it, and run `python game/level1.py` once — the window from that file is the start of the game
 - [ ] **15.** Start `.venv/bin/python .cursor/skills/instructor/scripts/watch_game.py`; saving any `.py` inside `game/` reopens the window; stop with `Ctrl+C`
