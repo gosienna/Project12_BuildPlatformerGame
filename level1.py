@@ -54,7 +54,7 @@ class GameWindow(arcade.Window):
         self.player_list.draw()
         self.wall_list.draw()
 
-    # TODO: after physics update, keep player.left >= 0 and player.right <= WINDOW_WIDTH
+    # TODO: TRY THIS comments above PLAYER_SPEED, JUMP_POWER, and gravity_constant
     def on_key_press(self, key, modifier):
         if key == arcade.key.LEFT:
             self.left_pressed = True
@@ -77,7 +77,13 @@ class GameWindow(arcade.Window):
             self.player.change_x = -PLAYER_SPEED
         else:
             self.player.change_x = 0
+            
         self.physics_engine.update()
+        if self.player.left < 0:
+            self.player.left = 0
+        if self.player.right > WINDOW_WIDTH:
+            self.player.right = WINDOW_WIDTH
+        
 
 def main():
     window = GameWindow()

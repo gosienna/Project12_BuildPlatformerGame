@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 12 of ~34** — waiting for the character to stop at the window edges
+Progress: **bite 13 of ~34** — waiting for TRY THIS notes, then one constant change with ↑ + Enter
 
 ## Bites
 
@@ -44,7 +44,7 @@ Progress: **bite 12 of ~34** — waiting for the character to stop at the window
 - [x] **11b-tune.** `PLAYER_SPEED` 2 is slow, 12 is fast, then set back to `5`
 - [x] **11c.** Jump: only if `can_jump()`, set `change_y = JUMP_POWER`
 - [x] **11c-tune.** `JUMP_POWER` 8 is a short hop, 35 is a high jump, then set back to `20`
-- [ ] **12.** Clamp the player to the window edges after physics update
+- [x] **12.** Clamp the player to the window edges after physics update
 - [ ] **13.** Add "TRY THIS" comments; change a constant, save, re-run with `↑` + `Enter`
 - [ ] **T4.** Peek inside the toolbox (`ls .venv/bin`, `pip list`, `pip show arcade`) + why not install globally
 - [ ] **T5.** (Bonus) Delete `.venv`, see the game fail, rebuild with Fix B
