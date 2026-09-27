@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite T4a of ~36** — waiting to list the toolbox folder
+Progress: **bite T4b of ~36** — waiting for `pip list` to show `arcade`
 
 ## Bites
 
@@ -46,7 +46,7 @@ Progress: **bite T4a of ~36** — waiting to list the toolbox folder
 - [x] **11c-tune.** `JUMP_POWER` 8 is a short hop, 35 is a high jump, then set back to `20`
 - [x] **12.** Clamp the player to the window edges after physics update
 - [x] **13.** TRY THIS notes on speed, jump, and gravity; speed set back to `5`
-- [ ] **T4a.** `ls .venv/bin` — see `python`, `pip`, and `activate`
+- [x] **T4a.** `ls .venv` shows `bin`; the toolbox list includes `python`, `pip`, `activate`, `Activate.ps1`, and `activate.fish`
 - [ ] **T4b.** `pip list` — `arcade` is in the short list
 - [ ] **T4c.** `pip show arcade` — `Location:` is inside `.venv`; say why not install arcade for the whole computer
 - [ ] **T5.** (Bonus) Delete `.venv`, see the game fail, rebuild with Fix B
