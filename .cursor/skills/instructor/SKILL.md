@@ -103,7 +103,7 @@ where the game starts), they may use the skill script from the **repo root**:
 
 It starts `game/level1.py` by default. A later level can pass another starter:
 `.venv/bin/python .cursor/skills/instructor/scripts/watch_game.py game/level2.py`.
-Saving any `.py` under `game/` closes and reopens the window. Saving
+Creating or saving any file under `game/` (a script, `.csv`, `.txt`, `.html`, image, or other visible file) closes and reopens the window. Saving
 `watch_game.py` itself does not, because the watcher is outside `game/`.
 Stop it with Ctrl+C.
 

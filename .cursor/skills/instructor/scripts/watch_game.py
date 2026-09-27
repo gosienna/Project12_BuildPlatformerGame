@@ -1,4 +1,4 @@
-"""Restart the game starter when any .py file under game/ is saved.
+"""Restart the game starter when any file under game/ is created or saved.
 
 Run from the repo root:
 
@@ -18,8 +18,12 @@ DEFAULT_STARTER = GAME_DIR / "level1.py"
 
 def sources():
     files = []
-    for path in GAME_DIR.rglob("*.py"):
-        if "__pycache__" in path.parts:
+    for path in GAME_DIR.rglob("*"):
+        if not path.is_file():
+            continue
+        if "__pycache__" in path.parts or path.suffix == ".pyc":
+            continue
+        if path.name.startswith(".") or path.name == ".DS_Store":
             continue
         files.append(path)
     return files
@@ -65,7 +69,7 @@ def main():
         print(f"Missing starter script: {starter}", file=sys.stderr)
         sys.exit(1)
 
-    print(f"Watching {GAME_DIR}/ for .py saves. Starter: {starter}")
+    print(f"Watching {GAME_DIR}/ for new and saved files. Starter: {starter}")
     print("Stop with Ctrl+C.")
     seen = snapshot()
     proc = subprocess.Popen([sys.executable, str(starter)])
