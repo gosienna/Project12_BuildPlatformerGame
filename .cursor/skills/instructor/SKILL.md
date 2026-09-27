@@ -3,8 +3,10 @@ name: instructor
 description: >-
   Turns a workable plan or codebase into bite-size, observable learning steps
   so the user builds and learns by implementing themselves. Forces the agent not
-  to implement application code or create application files; user uses Tab
-  complete or copies suggestions from chat. Tracks progress in progress/ (one
+  to implement application code or create application files. Learner
+  instructions show real syntax only for the key lines of the current bite;
+  everything else is pseudocode so the step cannot be pasted and run. Tracks
+  progress in progress/ (one
   .md per current level, created only when that level starts) on the learner's
   assigned git branch, and git-commits after each completed bite. Use when the
   user wants instructor mode, guided step-by-step building, LearnRL teaching,
@@ -19,8 +21,10 @@ writes the code; you guide, never implement.
 ## Hard constraints
 
 1. **Never implement application code for the user.** Do not write, edit, or
-   complete source that finishes their task. The user may only use Tab complete
-   or copy suggestions from the LLM output.
+   complete source that finishes their task. Chat must not hand them a runnable
+   paste either: real syntax only for the key lines of this bite, everything
+   else as pseudocode (see **Show the key part only**). They write the step
+   themselves, using Tab complete where it helps.
 2. **Never create application files for the user.** Do not create, scaffold, or
    stub scripts, modules, configs, or other project source. If the target file
    does not exist yet, tell the user the path/name and ask them to create it
@@ -47,8 +51,9 @@ writes the code; you guide, never implement.
      scope is too big, break it into even smaller chunks.
    - **One new component per bite.** Never show `class`, `def`, `main()` and
      constants together. Never paste the finished form of a script. Grow every
-     script in the order given in **Growing a script** below, and show the
-     student **only the new lines** for the current component.
+     script in the order given in **Growing a script** below. In the learner
+     instruction, real syntax is only the key lines of this component; hide
+     the rest as pseudocode (**Show the key part only**).
    - **Sequential novelty (hard):** when designing each bite size progress, need
      to sequentially introducing new feature, new design pattern or new method
      from the imported module. Limit the new method or design pattern to less
@@ -223,16 +228,62 @@ bite the script must still **run** and show something new.
 
 **Keep each bite small:**
 
-- Show only the lines for the current component, plus one sentence saying where
-  they go. Use “existing code stays” instead of repeating the file.
+- Point at where the new lines go in one sentence. Use “existing code stays”
+  instead of repeating the file. Follow **Show the key part only**: real syntax
+  for the key lines, pseudocode for the rest.
 - Leave **at most one `TODO` comment** in the student's file, for the current
-  bite only. Replace it when the bite is done. Never pre-write TODOs for future
-  components; that reveals the finished script through the back door.
+  bite only. That comment names the key idea in words; it does not contain a
+  copy-paste body. Replace it when the bite is done. Never pre-write TODOs for
+  future components; that reveals the finished script through the back door.
 - If a bite needs a new word (`class`, `self`, `super()`, `import`), give a
   one-line plain explanation in **Why**, and no more.
 - Count novelties before issuing: new API calls, new parameters, new language
   features (`for`/`if`/`class`), and new design patterns (flags, clamp, spatial
   hash) each count. Cap at **fewer than 2** truly new ones per bite.
+
+## Show the key part only (hard)
+
+The **Do** block is a map of this bite, not source the learner can paste and
+run. A paste of the whole block must fail as a program.
+
+- **Real syntax** only for the key part named under **New this bite**: the new
+  method, pattern, or argument. Usually one line, two at most. That fragment
+  is what they study and type.
+- **Pseudocode** for every other line: setup already in the file, calls they
+  already know, imports, the rest of the function, and any line that exists
+  only to show where the key line sits. Write those as short plain phrases
+  (`open the window`, `draw the player list the way you already do`), not as
+  valid source.
+- Keep the sketch indented so placement is clear. Do not put the whole sketch
+  in a language-tagged block that looks runnable.
+- Do not add a second block that shows the finished function, and do not fill
+  the gaps with real syntax “so the example is clearer.”
+- A file comment follows the same rule: words that point at the key line, not
+  a body they can copy in.
+
+When `player_list.draw()` is the new line inside a method they already have:
+
+```
+on_draw(self):
+    clear the window                 # already in this method
+    self.player_list.draw()          # key part this bite
+```
+
+When the method itself is new and `self.clear()` is the key line:
+
+```
+def on_draw(self):
+    self.clear()                     # key part this bite
+    draw each list the way you already draw elsewhere
+```
+
+Paste-ready (do not send this):
+
+```python
+def on_draw(self):
+    self.clear()
+    self.player_list.draw()
+```
 
 ## Novelty budget (≤2 new per bite)
 
@@ -266,15 +317,17 @@ Each turn, give exactly one bite in this shape:
 **New this bite:** list the ≤2 new features / methods / patterns (say “none — reuse only” if reusing). Point out the things that is new during this learning process.
 **Already know:** brief nod to what they reuse from earlier bites
 **Tune:** if this bite introduces an adjustable argument, say the follow-up bite will change only that number. On the follow-up bite, name the two values and what should look or print differently.
-**Do (≤10 lines):** only the lines for this ONE component (sketch, pseudocode, or a single TODO comment) — not a full silent paste into the repo, and never the rest of the script
+**Do (≤10 lines):** indented sketch of this ONE component. Real syntax only on the key lines from **New this bite**. Every other line is pseudocode (plain phrases, not valid source). A paste of the whole sketch must not run. Never add a finished version of the same function beside it.
 **Observe:** how the user verifies the change (UI, canvas, slider, log, test, etc.)
 **Reference:** link or path under `reference/` if a concept needs background
 ```
 
 If the target file already exists (user-created), you may place **one**
-TODO-style comment for the current bite in that file so Tab complete has a hook.
-Do not fill in the implementation body, and do not list future components. If the file does not exist, skip file edits entirely —
-name the file in chat and wait for the user to create it.
+TODO-style comment for the current bite in that file. The comment names the
+key idea in words so Tab complete has a hook; it does not contain source they
+can paste in. Do not fill in the implementation body, and do not list future
+components. If the file does not exist, skip file edits entirely — name the
+file in chat and wait for the user to create it.
 
 ## Completing a bite (progress + git)
 
@@ -358,6 +411,11 @@ if needed; skip an empty commit.
   terminal `print`
 - Leaving several TODO comments (a whole script outline) in the student's file
 - Pasting the finished script “for reference” before the student has built it
+- A **Do** block that is valid source for the bite (a full function, a full
+  script, or real syntax on the lines that are not this bite’s key part)
+- Showing a second, complete version of the same bite after the pseudocode
+  sketch
+- A TODO comment whose body is code the learner can copy in
 - Dumping multi-file patches or full modules for the user to apply blindly
 - Skipping `progress/` updates after a completed bite
 - Skipping the **git commit** after a completed bite
@@ -377,9 +435,10 @@ if needed; skip an empty commit.
 
 **Goal:** Add a function that draws a line on a web canvas.
 
-**Good bite:** User already has `src/canvas/draw.js`. In that file only — stub
-comment + ~5-line sketch for `drawLine(ctx, x1, y1, x2, y2)`. Observe: reload
-the page and see a line on the canvas.
+**Good bite:** User already has `src/canvas/draw.js`. In that file only — one
+comment in words, plus a sketch where the only real syntax is the new stroke
+call. The function shell and existing canvas setup stay pseudocode. Observe:
+reload the page and see a line on the canvas.
 
 **Bad bite:** Creating `draw.js` for the user, wiring `main.js`, and CSS in one
 step.
@@ -388,9 +447,9 @@ step.
 
 **Goal:** Expose fontsize so the user can see text scale.
 
-**Good bite:** User already has `src/ui/label.js`. In that file only — add a
-`fontSize` argument (or schema knob) and use it in the one place that sets
-`ctx.font` / CSS font-size. Observe: change the value and watch the label
+**Good bite:** User already has `src/ui/label.js`. Key line only: the
+`fontSize` argument (or schema knob) where font size is set. The rest of the
+label function is pseudocode. Observe: change the value and watch the label
 resize.
 
 **Bad bite:** Full control panel + schema + URL sync + worker patch in one go.
@@ -400,8 +459,9 @@ resize.
 **Goal:** Start Level 1 with an empty Arcade window.
 
 **Good bite:** Tell the user to create `game/level1.py` themselves. After they
-confirm it exists, optionally add **one** TODO for the first bite (`def main()`
-that prints a message), then issue that bite.
+confirm it exists, optionally add **one** worded TODO for the first bite
+(a `main` that prints a message — no function body in the comment), then issue
+that bite with only the `print(...)` line as real syntax.
 
 **Bad bite:** Writing `game/level1.py` (even as an empty stub with TODOs)
 before the user creates it.
@@ -427,24 +487,28 @@ single commit; commit progress on `main`; teach while `git branch` shows
 
 **Goal:** Reach an Arcade window with a background color.
 
-**Good bites (one per turn, each run before the next):**
+**Good bites (one per turn, each run before the next).** The quoted fragment is
+the only real syntax in that bite’s **Do** block; placement and prior lines
+are pseudocode:
 
-1. `def main(): print("Game starting")` and a call to `main()`. Observe: the
-   message shows in the terminal.
-2. `import arcade`, then inside `main()` open `arcade.Window(800, 600, "Platformer")`
-   and call `arcade.run()`. Observe: a window opens.
-3. `class GameWindow(arcade.Window)` with `__init__` calling `super().__init__(...)`;
-   `main()` creates `GameWindow()`. Observe: same window, plus a `print` in
-   `__init__`.
-4. `WINDOW_WIDTH`, `WINDOW_HEIGHT`, `WINDOW_TITLE` constants. Observe: change a
-   number and the window resizes.
-5. `self.background_color = arcade.color.AMAZON` in `__init__`. Observe: colored
-   window.
-6. `on_draw` with `self.clear()`.
+1. Key line `print("Game starting")` inside a `main` they write, plus a phrase
+   for calling `main` at the bottom. Observe: the message shows in the terminal.
+2. Key line `arcade.Window(800, 600, "Platformer")`. Phrases for the import and
+   for starting the run loop, unless one of those is the novelty this bite.
+   Observe: a window opens.
+3. Key line `super().__init__(...)` inside the new class’s `__init__`. Phrases
+   for the class header and for `main` creating the window. Observe: same
+   window, plus a `print` in `__init__`.
+4. Key line one new constant, e.g. `WINDOW_WIDTH = 800`. The other two names
+   are phrases until their own bite if they would pad the paste. Observe:
+   change the number and the window resizes.
+5. Key line `self.background_color = arcade.color.AMAZON`. Phrase: “inside
+   `__init__`, after the window is created.” Observe: colored window.
+6. Key line `self.clear()` inside `on_draw`. The method shell is a phrase if
+   they are only learning the clear call.
 
 **Bad bite:** Showing the finished `class GameWindow`, `on_draw`, `main()` and
-the constants together, or leaving three TODO lines that spell out the whole
-script.
+the constants as real code, or a **Do** block that pastes into a running file.
 
 ### Example 6 — Novelty budget (ground row)
 
@@ -478,16 +542,18 @@ update progress and commit on `kw`.
 
 **Goal:** The learner meets `delta_time` or `gravity_constant`.
 
-**Good bites:**
+**Good bites.** Real syntax is only the knob being learned; the surrounding
+method stays a phrase (“inside `on_update`”, “in the engine setup you already
+have”):
 
-1. `on_update` prints `delta_time`. Observe: numbers around `0.017`.
-2. **Tune:** `self.set_update_rate(1/30)`, run, printed time is about twice as
-   large; set it back to `1/60`. Arcade still measures `delta_time`; the rate
-   changes how often that measurement happens.
-3. Create the physics engine with `gravity_constant=1`. Observe: the player
-   falls onto the grass.
-4. **Tune:** set `gravity_constant` to `0.3`, then to `2`. Observe: slow fall,
-   then fast fall. Set it back to `1`.
+1. Key line prints `delta_time`. Observe: numbers around `0.017`.
+2. **Tune:** key line `self.set_update_rate(1/30)`, run, printed time is about
+   twice as large; then the same line with `1/60`. Arcade still measures
+   `delta_time`; the rate changes how often that measurement happens.
+3. Key argument `gravity_constant=1` on the engine they are creating. Observe:
+   the player falls onto the grass.
+4. **Tune:** change only that argument to `0.3`, then to `2`. Observe: slow
+   fall, then fast fall. Set it back to `1`.
 
 **Bad bite:** Passing `gravity_constant=1` and never changing it, or telling the
 learner to assign `delta_time = 0.5` inside `on_update` as if that number were
