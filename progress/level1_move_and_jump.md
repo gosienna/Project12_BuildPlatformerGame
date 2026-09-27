@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite T4c of ~36** — waiting for `pip show arcade` to point inside `.venv`
+Progress: **bite T5a of ~37** — waiting to delete `.venv` and see the game fail
 
 ## Bites
 
@@ -48,8 +48,9 @@ Progress: **bite T4c of ~36** — waiting for `pip show arcade` to point inside 
 - [x] **13.** TRY THIS notes on speed, jump, and gravity; speed set back to `5`
 - [x] **T4a.** `ls .venv` shows `bin`; the toolbox list includes `python`, `pip`, `activate`, `Activate.ps1`, and `activate.fish`
 - [x] **T4b.** `pip list` — `arcade` 3.3.3 is in the short list
-- [ ] **T4c.** `pip show arcade` — `Location:` is inside `.venv`; say why not install arcade for the whole computer
-- [ ] **T5.** (Bonus) Delete `.venv`, see the game fail, rebuild with Fix B
+- [x] **T4c.** `pip show arcade` — `Location` is inside `.venv`; the toolbox keeps this project separate from the rest of the computer
+- [ ] **T5a.** `deactivate`, delete `.venv`, run the game — no window
+- [ ] **T5b.** Rebuild with Fix B (`python3 -m venv`, activate, `pip install arcade`) — the window comes back and `level1.py` was never changed
 - [ ] **14.** Create `game/`, move `level1.py` into it, and run `python game/level1.py` once — the window from that file is the start of the game
 - [ ] **15.** Start `.venv/bin/python .cursor/skills/instructor/scripts/watch_game.py`; saving any `.py` inside `game/` reopens the window; stop with `Ctrl+C`
 - [ ] **16.** Save a drawing or web image as `game/hero.png`, point the player sprite at `"game/hero.png"`, and save `game/level1.py` — the watcher reopens the window with that picture as the hero; grass and boxes stay on `:resources:` images
