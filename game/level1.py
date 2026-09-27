@@ -9,7 +9,7 @@ TILE_SIZE = 64
 # 2 walks slowly, 12 walks fast
 PLAYER_SPEED = 5
 # TRY THIS: 8 is a short hop, 35 is a high jump
-JUMP_POWER = 30
+JUMP_POWER = 20
 
 class GameWindow(arcade.Window):
     def __init__(self):
@@ -21,8 +21,8 @@ class GameWindow(arcade.Window):
         self.background_color = arcade.color.AMAZON
         self.player_list = arcade.SpriteList()
         self.player = arcade.Sprite(
-            ":resources:images/animated_characters/female_adventurer/femaleAdventurer_idle.png",
-            scale=0.5,
+            "game/hero.png",
+            scale=0.1,
         )
         self.player.center_x = 100
         self.player.center_y = 228

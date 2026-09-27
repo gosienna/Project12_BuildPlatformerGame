@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 16 of ~40** — waiting for your own picture to be the hero
+Progress: **Level 1 complete** — hero is `game/hero.png`; all bites checked
 
 ## Bites
 
@@ -56,4 +56,4 @@ Progress: **bite 16 of ~40** — waiting for your own picture to be the hero
 - [x] **14a.** `mkdir game` — `ls` shows both `game` and `level1.py`
 - [x] **14b.** Move `level1.py` into `game/` and run `python game/level1.py` — the window opens from that file
 - [x] **15.** Watcher started `game/level1.py`; a new or saved file under `game/` (not only `.py`) prints `Restart` and reopens the window; stopped with `Ctrl+C`
-- [ ] **16.** Save a drawing or web image as `game/hero.png`, point the player sprite at `"game/hero.png"`, and save `game/level1.py` — the watcher reopens the window with that picture as the hero; grass and boxes stay on `:resources:` images
+- [x] **16.** `game/hero.png` is the player sprite; a save restarts the window; grass and boxes stay on `:resources:` images
