@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 14a of ~40** — waiting to create the `game` folder
+Progress: **bite 14b of ~40** — waiting to run `python game/level1.py`
 
 ## Bites
 
@@ -53,7 +53,7 @@ Progress: **bite 14a of ~40** — waiting to create the `game` folder
 - [x] **T5b1.** `python3 -m venv .venv` — `.venv` has `bin`, `include`, `lib`, and `pyvenv.cfg`
 - [x] **T5b2.** `source .venv/bin/activate` — the prompt starts with `(.venv)`; the game still has no arcade
 - [x] **T5b3.** `pip install arcade`, then run the game — the window opens and `level1.py` was never changed
-- [ ] **14a.** `mkdir game` — a `game` folder exists
+- [x] **14a.** `mkdir game` — `ls` shows both `game` and `level1.py`
 - [ ] **14b.** Move `level1.py` into `game/` and run `python game/level1.py` — the window opens from that file
 - [ ] **15.** Start `.venv/bin/python .cursor/skills/instructor/scripts/watch_game.py`; saving any `.py` inside `game/` reopens the window; stop with `Ctrl+C`
 - [ ] **16.** Save a drawing or web image as `game/hero.png`, point the player sprite at `"game/hero.png"`, and save `game/level1.py` — the watcher reopens the window with that picture as the hero; grass and boxes stay on `:resources:` images
