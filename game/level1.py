@@ -9,7 +9,7 @@ TILE_SIZE = 64
 # 2 walks slowly, 12 walks fast
 PLAYER_SPEED = 5
 # TRY THIS: 8 is a short hop, 35 is a high jump
-JUMP_POWER = 20
+JUMP_POWER = 30
 
 class GameWindow(arcade.Window):
     def __init__(self):

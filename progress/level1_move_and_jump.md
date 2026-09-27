@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite 15 of ~40** — waiting for a save inside `game/` to reopen the window
+Progress: **bite 16 of ~40** — waiting for your own picture to be the hero
 
 ## Bites
 
@@ -55,5 +55,5 @@ Progress: **bite 15 of ~40** — waiting for a save inside `game/` to reopen the
 - [x] **T5b3.** `pip install arcade`, then run the game — the window opens and `level1.py` was never changed
 - [x] **14a.** `mkdir game` — `ls` shows both `game` and `level1.py`
 - [x] **14b.** Move `level1.py` into `game/` and run `python game/level1.py` — the window opens from that file
-- [ ] **15.** Start `.venv/bin/python .cursor/skills/instructor/scripts/watch_game.py`; saving any `.py` inside `game/` reopens the window; stop with `Ctrl+C`
+- [x] **15.** Watcher started `game/level1.py`; saving that file printed `Restart` and reopened the window; stopped with `Ctrl+C`
 - [ ] **16.** Save a drawing or web image as `game/hero.png`, point the player sprite at `"game/hero.png"`, and save `game/level1.py` — the watcher reopens the window with that picture as the hero; grass and boxes stay on `:resources:` images
