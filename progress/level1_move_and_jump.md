@@ -4,7 +4,7 @@ Learner: kw
 Branch: kw
 Source plan: `framework/level1_move_and_jump.md`
 
-Progress: **bite T5b2 of ~39** — waiting for `(.venv)` on the prompt
+Progress: **bite T5b3 of ~39** — waiting to install arcade and open the window
 
 ## Bites
 
@@ -51,7 +51,7 @@ Progress: **bite T5b2 of ~39** — waiting for `(.venv)` on the prompt
 - [x] **T4c.** `pip show arcade` — `Location` is inside `.venv`; the toolbox keeps this project separate from the rest of the computer
 - [x] **T5a.** Deleted `.venv` — `python3 level1.py` raises `No module named 'arcade'`; `level1.py` stayed
 - [x] **T5b1.** `python3 -m venv .venv` — `.venv` has `bin`, `include`, `lib`, and `pyvenv.cfg`
-- [ ] **T5b2.** `source .venv/bin/activate` — the prompt starts with `(.venv)`
+- [x] **T5b2.** `source .venv/bin/activate` — the prompt starts with `(.venv)`; the game still has no arcade
 - [ ] **T5b3.** `pip install arcade`, then run the game — the window opens and `level1.py` was never changed
 - [ ] **14.** Create `game/`, move `level1.py` into it, and run `python game/level1.py` once — the window from that file is the start of the game
 - [ ] **15.** Start `.venv/bin/python .cursor/skills/instructor/scripts/watch_game.py`; saving any `.py` inside `game/` reopens the window; stop with `Ctrl+C`
