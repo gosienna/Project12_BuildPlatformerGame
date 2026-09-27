@@ -85,7 +85,7 @@ Terminal quests (**T1** to **T5**) sit between the game bites. **Pacing rule:** 
   1. `deactivate`, then `rm -rf .venv` [`rmdir /s /q .venv`]. Run the game: it fails, so the window is gone.
   2. Rebuild with the three **Fix B** commands from Level 0. Run the game: the window is back, and `level1.py` was never touched. `.venv` is disposable and the project files are safe.
 - **14. Move into `game/` and run the starter yourself.** Create a `game/` folder, move `level1.py` into it, and run `python game/level1.py` once. The window opening from that file is the start of the game. Earlier bites still use `python level1.py` from the repo root.
-- **15. Auto-rerun.** From the repo root, start `.venv/bin/python .cursor/skills/instructor/scripts/watch_game.py`. Saving any `.py` file inside `game/` closes and reopens the window. Stop the watcher with `Ctrl+C`.
+- **15. Auto-rerun.** From the repo root, start `.venv/bin/python .cursor/skills/instructor/scripts/watch_game.py`. Creating or saving any file inside `game/` (a script, `.csv`, `.txt`, `.html`, image, or other visible file) closes and reopens the window. Stop the watcher with `Ctrl+C`.
 
 > Why use flags instead of setting `change_x` directly in `on_key_press`? If you do it directly, then holding RIGHT, tapping LEFT and releasing it stops the player even though RIGHT is still held. Flags avoid that bug.
 
